@@ -15,7 +15,7 @@ export default function Topbar({ menuOpen, setMenuOpen }) {
           </div>
           <div className='itemContainer'>
             <Mail className='icon' />
-            <span>mtechsolutions@gmail.com</span>
+            <span>mtechsolutions2000@gmail.com</span>
           </div>
         </div>
         <div className='right'>

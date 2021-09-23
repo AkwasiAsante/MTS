@@ -1,9 +1,8 @@
-import './works.scss';
 import { useState } from 'react';
+import './works.scss';
 
 export default function Works() {
   const [currentSlide, setCurrentSlide] = useState(0);
-
   const data = [
     {
       id: '1',
@@ -16,7 +15,7 @@ export default function Works() {
       id: '2',
       icon: './assets/globe.png',
       title: 'Mobile Application',
-      desc: 'Lorem Ipsum is simply dummy text of the printing and type setting industry.',
+      desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       img: 'https://i.pinimg.com/originals/e9/c9/2f/e9c92f7869d682a6fa5a97fb8a298f30.jpg',
     },
     {
@@ -44,7 +43,7 @@ export default function Works() {
           <div className='container'>
             <div className='item'>
               <div className='left'>
-                <div className='letfContainer'>
+                <div className='leftContainer'>
                   <div className='imgContainer'>
                     <img src={d.icon} alt='' />
                   </div>
