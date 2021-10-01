@@ -6,7 +6,7 @@ import {
   webPortfolio,
   mobilePortfolio,
   designPortfolio,
-  contentPortfolio,
+  softwarePortfolio,
 } from '../../data';
 
 export default function Portfolio() {
@@ -30,8 +30,8 @@ export default function Portfolio() {
       title: 'Design',
     },
     {
-      id: 'content',
-      title: 'Content',
+      id: 'software',
+      title: 'Software',
     },
   ];
 
@@ -49,8 +49,8 @@ export default function Portfolio() {
       case 'design':
         setData(designPortfolio);
         break;
-      case 'content':
-        setData(contentPortfolio);
+      case 'software':
+        setData(softwarePortfolio);
         break;
 
       default:

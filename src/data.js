@@ -101,7 +101,7 @@ export const designPortfolio = [
   {
     id: 1,
     title: 'Design Social Media App',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKvdHn8GmPGCO0y3SJqNHACygpm0h9VycMHg&usqp=CAU',
+    img: 'https://th.bing.com/th/id/R.d8eb8b4ff52faf91155f1f680a2d1d2d?rik=HTk7UfFX8%2f%2fQAQ&pid=ImgRaw&r=0',
   },
   {
     id: 2,
@@ -111,7 +111,7 @@ export const designPortfolio = [
   {
     id: 3,
     title: 'Design E-commerce Web Design',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKvdHn8GmPGCO0y3SJqNHACygpm0h9VycMHg&usqp=CAU',
+    img: 'assets/work.png',
   },
   {
     id: 4,
@@ -130,35 +130,35 @@ export const designPortfolio = [
   },
 ];
 
-export const contentPortfolio = [
+export const softwarePortfolio = [
   {
     id: 1,
-    title: 'Content Social Media App',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKvdHn8GmPGCO0y3SJqNHACygpm0h9VycMHg&usqp=CAU',
-  },
-  {
-    id: 2,
-    title: 'Content Rampa UI Design',
-    img: 'https://th.bing.com/th/id/R.42b15e3205084656d7adc9982658d9a8?rik=ONYXzegQ%2f%2ftZ5Q&pid=ImgRaw&r=0',
-  },
-  {
-    id: 3,
-    title: 'Content E-commerce Web Design',
-    img: 'https://th.bing.com/th/id/R.d8eb8b4ff52faf91155f1f680a2d1d2d?rik=HTk7UfFX8%2f%2fQAQ&pid=ImgRaw&r=0',
-  },
-  {
-    id: 4,
-    title: 'Content Relax Mobile App',
+    title: 'School System',
     img: 'https://th.bing.com/th/id/R.7bc9e384c46dff7a59550b131363cd25?rik=Aad3Nbf92Jh4gQ&pid=ImgRaw&r=0',
   },
   {
+    id: 2,
+    title: 'MTS POS System',
+    img: 'assets/Dashboard.png',
+  },
+  {
+    id: 3,
+    title: 'C#/VB.Net Pagination Lib',
+    img: 'assets/page.png',
+  },
+  {
+    id: 4,
+    title: 'Flat UI',
+    img: 'assets/Login 1.png',
+  },
+  {
     id: 5,
-    title: 'Content Keser Web Design',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKvdHn8GmPGCO0y3SJqNHACygpm0h9VycMHg&usqp=CAU',
+    title: 'Custom Software Setting',
+    img: 'assets/Settings 5.png',
   },
   {
     id: 6,
-    title: 'Content Banking App',
+    title: 'Hospital/Clinic App',
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKvdHn8GmPGCO0y3SJqNHACygpm0h9VycMHg&usqp=CAU',
   },
 ];

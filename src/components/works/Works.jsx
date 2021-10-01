@@ -20,6 +20,13 @@ export default function Works() {
     },
     {
       id: '3',
+      icon: './assets/mobile.png',
+      title: 'Software Development',
+      desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      img: 'assets/Login 1.png',
+    },
+    {
+      id: '4',
       icon: './assets/writing.png',
       title: 'Branding',
       desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -29,7 +36,7 @@ export default function Works() {
 
   const handleClick = (way) => {
     way === 'left'
-      ? setCurrentSlide(currentSlide > 0 ? currentSlide - 1 : 2)
+      ? setCurrentSlide(currentSlide > 0 ? currentSlide - 1 : 3)
       : setCurrentSlide(currentSlide < data.length - 1 ? currentSlide + 1 : 0);
   };
 
