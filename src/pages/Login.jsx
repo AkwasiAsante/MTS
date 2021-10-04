@@ -11,16 +11,34 @@ import Logo from '../assets/ay.jpg';
 import { Formik, Form } from 'formik';
 import { TextInput } from '../components/FormLib';
 import { MailOutline, LockOutlined } from '@material-ui/icons';
+import * as Yup from 'yup';
 
 const Login = () => {
   return (
     <div>
       <StyledFormWrapper>
         <Avatar image={Logo} />
-        <StyledTitle size={30} color={colors.theme}>
+        <StyledTitle size={30} color={colors.colortheme}>
           Member Login
         </StyledTitle>
-        <Formik>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+          validateSchema={Yup.object({
+            email: Yup.string()
+              .email('Inalid email address')
+              .required('Required'),
+            password: Yup.string()
+              .min(8, 'Password is too short')
+              .max(30, 'Password is too long')
+              .required('Required'),
+          })}
+          onSubmit={(values, { setSubmitting }) => {
+            console.log(values);
+          }}
+        >
           {() => (
             <Form>
               <TextInput

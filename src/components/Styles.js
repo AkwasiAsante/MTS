@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import backgroundImage from '../assets/back.jpg';
 import { Link } from 'react-router-dom';
-import { grey } from '@material-ui/core/colors';
 
 export const colors = {
   primary: '#fff',
-  theme: '#BE185D',
+  colortheme: '#BE185D',
   light1: '#F3F4F6',
   light2: '#E5E7E8',
   dark1: '#1F2937',
@@ -71,7 +70,7 @@ export const StyledButton = styled(Link)`
 
   &:hover {
     background-color: ${colors.primary};
-    color: ${colors.theme};
+    color: ${colors.colortheme};
     cursor: pointer;
   }
 `;
@@ -91,7 +90,8 @@ const StyledTextInput = styled.input`
   text-align: center;
   font-size: 14px;
   letter-spacing: 1px;
-  color: ${colors.light2};
+  color: ${colors.dark1};
+  background-color: ${colors.light2};
   border: 0;
   outline: 0;
   border-radius: 5px;
@@ -128,19 +128,34 @@ const StyledFormButton = styled.button`
   width: 150px;
   background-color: transparent;
   font-size: 16px;
-  border: 2px solid ${colors.theme};
+  border: 2px solid ${colors.colortheme};
 
   border-radius: 25px;
-  color: ${colors.theme};
+  color: ${colors.colortheme};
 
   text-align: center;
   transition: ease-in-out 0.3s;
 
   &:hover {
-    background-color: ${colors.theme};
+    background-color: ${colors.colortheme};
     color: ${colors.primary};
     cursor: pointer;
   }
+`;
+//Error Msg
+const ErrorMsg = styled.div`
+  font-size: 11px;
+  color: ${colors.red};
+  margin-top: -5px;
+  margin-bottom: 10px;
+  text-align: left;
+`;
+
+const ExtraText = styled.p`
+  font-size: ${(props) => props.size}px;
+  color: ${(props) => (props.color ? props.color : colors.dark2)};
+  padding: 2px;
+  margin-top: 10px;
 `;
 
 //Icons
@@ -160,4 +175,6 @@ export {
   StyledFormWrapper,
   StyledFormButton,
   StyledIcons,
+  ErrorMsg,
+  ExtraText,
 };

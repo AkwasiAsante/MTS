@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       <StyledContainer>
-        <Login />
+        <Home />
       </StyledContainer>
     </Router>
   );
