@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { sessionService } from 'redux-react-session';
+import { apiMain } from '../store';
 
 export const loginUser = (
   credentials,
@@ -9,7 +10,7 @@ export const loginUser = (
 ) => {
   return () => {
     axios
-      .post('https://dry-forest-10776.herokuapp.com/user/signin', credentials, {
+      .post(apiMain + '/user/signin', credentials, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -38,7 +39,7 @@ export const loginUser = (
               sessionService
                 .saveUser(userData)
                 .then(() => {
-                  history.push('/dashboard');
+                  history.push('/admindashboard');
                 })
                 .catch((err) => console.error(err));
             })
@@ -59,7 +60,7 @@ export const signupUser = (
 ) => {
   return (dispatch) => {
     axios
-      .post('https://dry-forest-10776.herokuapp.com/user/signup', credentials, {
+      .post(apiMain + '/user/signup', credentials, {
         headers: {
           'Content-Type': 'application/json',
         },
