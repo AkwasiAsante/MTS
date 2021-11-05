@@ -132,7 +132,7 @@ export default function ListCamp() {
 
             <DeleteOutline
               className='userListDelete'
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
@@ -155,34 +155,19 @@ export default function ListCamp() {
     getData();
   }, []);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (_id) => {
     let confirmDelete = window.confirm(
       'Do you want to delete the seledted item ?'
     );
-    console.log(id);
+
     if (confirmDelete === true) {
-      axios.delete(apiCamp + `/delete/` + id).then((res) => {
-        alert(id + ' has been deleted successfully');
-        // alert(res);http://localhost:5000/camp
-        console.log(res);
-        console.log(res.status);
+      const url = `${apiCamp}/delete/${_id}`;
+
+      await axios.delete(url).then((res) => {
+        alert(_id + ' has been deleted successfully');
+        // setData(data.filter((item) => item.id !== _id));
+        setRows(data);
       });
-      // setData(data.filter((item) => item.id !== id));
-      // setRows(data);
-      // http://localhost:500/camp/delete/618556dbe4f2e5e3cb30e5e8
-      // http://localhost:5000/camp/delete/6184dcd8857e18f246ab28ee
-      // await axios
-      //   .delete(`http://localhost:5000/camp/delete/` + id)
-      //   .then((response) => {
-      //     alert('success');
-      //     console.log(response);
-      //     setData(data.filter((item) => item.id !== id));
-      //     setRows(data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      // });
     }
   };
   return (
