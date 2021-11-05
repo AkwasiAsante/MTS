@@ -31,9 +31,10 @@ const CampRegister = ({ campRegister }) => {
       type: 'text',
       placeholder: 'First Name',
       errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special character!",
+        "Name should be 3-32 characters and shouldn't include any special character!",
       label: 'First Name',
-      pattern: '^[A-Za-z0-9]{3,20}$',
+      maxlength: '32',
+      pattern: '^[A-Za-z0-9 ]{3,32}$',
       required: true,
     },
     {
@@ -42,15 +43,17 @@ const CampRegister = ({ campRegister }) => {
       type: 'text',
       placeholder: 'Last Name',
       errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special character!",
+        "Name should be 3-32 characters and shouldn't include any special character!",
       label: 'Last Name',
-      pattern: '^[A-Za-z0-9]{3,16}$',
+      maxlength: '32',
+      pattern: '^[A-Za-z0-9 ]{3,32}$',
+      // pattern: '[A-Za-z]{1,32}',
       required: true,
     },
     {
       id: 3,
       name: 'contact',
-      type: 'text',
+      type: 'number',
       placeholder: 'Mobile Number',
       label: 'Contact #',
     },

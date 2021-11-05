@@ -11,7 +11,7 @@ const BasicRoute = ({ children, authenticated, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: '/dashboard',
+              pathname: '/admindashboard',
               state: { from: location },
             }}
           />

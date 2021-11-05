@@ -105,7 +105,7 @@ export default function ListCamp() {
   };
 
   const cols = [
-    { headerName: 'ID', field: '_id', hide: true },
+    { headerName: 'ID', field: '_id', width: 200 },
     { headerName: 'First Name', field: 'fname', width: 200, flex: 1 },
     { headerName: 'Last Name', field: 'lname', width: 200, flex: 1 },
     { headerName: 'Gender', field: 'gender', width: 150, flex: 1 },
@@ -132,7 +132,7 @@ export default function ListCamp() {
 
             <DeleteOutline
               className='userListDelete'
-              // onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row.id)}
             />
           </>
         );
@@ -154,6 +154,25 @@ export default function ListCamp() {
     };
     getData();
   }, []);
+
+  const handleDelete = async (id) => {
+    let confirmDelete = window.confirm(
+      'Do you want to delete the seledted item ?'
+    );
+    console.log(id);
+    if (confirmDelete == true) {
+      await axios
+        .delete(apiCamp + `/` + id)
+        .then((response) => {
+          const { data } = response;
+          alert(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(data);
+        });
+    }
+  };
   return (
     <div className='mtable'>
       <div style={{ height: '83vh', width: '98.5%', margin: '10px 10px' }}>

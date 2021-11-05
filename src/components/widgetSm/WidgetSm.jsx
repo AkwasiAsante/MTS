@@ -3,7 +3,8 @@ import {
   Person,
   FolderOpen,
   FileCopy,
-  Book,
+  Description,
+  InsertDriveFile,
   FolderOutlined,
 } from '@material-ui/icons';
 import { useEffect, useState } from 'react';
@@ -61,7 +62,7 @@ export default function WidgetSm() {
     };
     const getFemale = async () => {
       await axios
-        .get(apiCamp + '/others')
+        .get(apiCamp + '/female')
         .then((response) => {
           setFemaleStats(response.data);
         })
@@ -83,17 +84,21 @@ export default function WidgetSm() {
         <div className='gender'>
           <div className='genTitle'>
             <p>Total Male</p>
-            <Person className='gen-icon' />
           </div>
-          <h2>{maleStats}</h2>
+          <div className='icon-val'>
+            <Person className='gen-icon' />
+            <h2>{maleStats}</h2>
+          </div>
         </div>
 
         <div className='gender'>
           <div className='genTitle'>
             <p>Total Female</p>
-            <Person className='gen-icon' />
           </div>
-          <h2>{femaleStats}</h2>
+          <div className='icon-val'>
+            <Person className='gen-icon' />
+            <h2>{femaleStats}</h2>
+          </div>
         </div>
       </div>
 
@@ -101,17 +106,21 @@ export default function WidgetSm() {
         <div className='gender'>
           <div className='genTitle'>
             <p>Districts</p>
-            <FolderOpen className='gen-icon' />
           </div>
-          <h2>2</h2>
+          <div className='icon-val'>
+            <Description className='gen-icon' />
+            <h2>2</h2>
+          </div>
         </div>
         {/* <div className='vl'></div> */}
         <div className='gender'>
           <div className='genTitle'>
             <p>Buduburam</p>
-            <Book className='gen-icon' />
           </div>
-          <h2>{buduStats}</h2>
+          <div className='icon-val'>
+            <FolderOpen className='gen-icon' />
+            <h2>{buduStats}</h2>
+          </div>
         </div>
       </div>
 
@@ -119,17 +128,21 @@ export default function WidgetSm() {
         <div className='gender'>
           <div className='genTitle'>
             <p>Kasoa West</p>
-            <FolderOutlined className='gen-icon' />
           </div>
-          <h2>{kasoaStats}</h2>
+          <div className='icon-val'>
+            <InsertDriveFile className='gen-icon' />
+            <h2>{kasoaStats}</h2>
+          </div>
         </div>
         {/* <div className='vl'></div> */}
         <div className='gender'>
           <div className='genTitle'>
             <p>Others</p>
-            <FileCopy className='gen-icon' />
           </div>
-          <h2>{othersStats}</h2>
+          <div className='icon-val'>
+            <FileCopy className='gen-icon' />
+            <h2>{othersStats}</h2>
+          </div>
         </div>
       </div>
     </div>

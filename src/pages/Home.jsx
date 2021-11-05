@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { init } from 'ityped';
 import {
   StyledTitle,
   StyledSubTitle,
@@ -8,8 +9,24 @@ import {
   BlinkContainer,
 } from '../components/Styles';
 import Logo from './../assets/Logo.png';
+import './home.css';
 
 const Home = () => {
+  const textRef = useRef();
+
+  useEffect(() => {
+    init(textRef.current, {
+      showCursor: true,
+      backDelay: 1500,
+      backSpeed: 50,
+      strings: [
+        'Venue: Panfokrom NVTI',
+        'Date: 19th - 26th Dec.',
+        'Rate: GHC 50.00 Only',
+        `Register Now `,
+      ],
+    });
+  }, []);
   return (
     <div>
       <div
@@ -25,6 +42,10 @@ const Home = () => {
         }}
       >
         <MyAvatar image={Logo} />
+      </div>
+      <div className='blink-con'>
+        <h2>Youth Camp 2021 -</h2>
+        <p ref={textRef}></p>
       </div>
       <StyledTitle size={65}>You're Welcome</StyledTitle>
 

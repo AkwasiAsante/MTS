@@ -39,6 +39,26 @@
 .navbar a:hover {
   color: #006eb6;
 }
+.btn-logout {
+  background-color: #006eb6;
+  padding: 8px 25px;
+  outline: 0;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: ease-in-out 0.3s;
+  outline: 0;
+}
+.btn-logout:hover {
+  background-color: #fff;
+  color: #006eb6;
+  cursor: pointer;
+  border: 2px solid #006eb6;
+}
 
 .card {
   margin-top: 6rem;

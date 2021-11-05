@@ -1,0 +1,41 @@
+.blink-con {
+  color: #fff;
+  display: flex;
+  text-align: center;
+}
+.blink-con h2,
+.blink-con p {
+  font-size: 25px;
+}
+.blink-con p {
+  color: gold;
+  margin-left: 5px;
+}
+.ityped-cursor {
+  animation: blink 1s infinite;
+
+  /* font-size: 2.2rem;
+  opacity: 1;
+  -webkit-animation: blink 0.3s infinite;
+  -moz-animation: blink 0.3s infinite;
+  animation: blink 0.3s infinite;
+  animation-direction: alternate; */
+}
+
+@keyframes blink {
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 786px) {
+  .blink-con {
+    display: block;
+  }
+  .blink-con p {
+    margin-top: 5px;
+  }
+}

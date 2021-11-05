@@ -16,7 +16,6 @@ import { connect } from 'react-redux';
 import CampRegister from './pages/CampRegister';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import CampList from './pages/CampList';
-import MUIGrid from './components/ListCamp';
 
 function App({ checked }) {
   return (
@@ -34,7 +33,11 @@ function App({ checked }) {
               <CampRegister />
             </StyledContainer>
           </BasicRoute>
-
+          <AuthRoute path='/campregister-2021'>
+            <StyledContainer>
+              <CampRegister />
+            </StyledContainer>
+          </AuthRoute>
           <BasicRoute path='/login'>
             <StyledContainer>
               <Login />
@@ -52,15 +55,12 @@ function App({ checked }) {
           <AuthRoute path='/camplist'>
             <CampList />
           </AuthRoute>
-          {/* <Route path='/mts'>
-            <MUIGrid />
-          </Route> */}
 
-          <Route path='/'>
+          <BasicRoute path='/'>
             <StyledContainer>
               <Home />
             </StyledContainer>
-          </Route>
+          </BasicRoute>
         </Switch>
       )}
     </Router>

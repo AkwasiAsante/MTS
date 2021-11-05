@@ -41,9 +41,9 @@ export default function WidgetLg() {
               <img
                 className='widgetLgImg'
                 src={
-                  data.ayclass === 'pathfinder'
+                  data.ayclass === 'Pathfinder'
                     ? Pathfinder
-                    : data.ayclass === 'adventurer'
+                    : data.ayclass === 'Adventurer'
                     ? Ad
                     : Mg
                 }

@@ -24,7 +24,7 @@ import Loader from 'react-loader-spinner';
 //Auth & redux
 import { connect } from 'react-redux';
 import { signupUser } from './../auth/actions/userActions';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Signup = ({ signupUser }) => {
   const history = useHistory();
@@ -32,7 +32,9 @@ const Signup = ({ signupUser }) => {
   return (
     <div>
       <StyledFormWrapper>
-        <MyAvatar image={Logo} />
+        <Link to='/'>
+          <MyAvatar image={Logo} />
+        </Link>
         <StyledTitle size={30} color={colors.primaryTheme}>
           Member Signup
         </StyledTitle>
