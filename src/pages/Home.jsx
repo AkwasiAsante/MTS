@@ -9,12 +9,6 @@ import {
 } from '../components/Styles';
 import Logo from './../assets/Logo.png';
 
-function blink() {
-  // var f = document.getElementById('Foo');
-  setInterval(function () {
-    f.style.display = f.style.display == 'none' ? '' : 'none';
-  }, 1000);
-}
 const Home = () => {
   return (
     <div>
