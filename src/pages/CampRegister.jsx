@@ -72,6 +72,7 @@ const CampRegister = ({ campRegister }) => {
     }
     const str2 = arr.join(' ');
   };
+
   const onChange = (e) => {
     setData({
       ...data,
@@ -175,6 +176,7 @@ const CampRegister = ({ campRegister }) => {
 
           {isSubmitting && (
             <Loader
+              className='loader'
               type='ThreeDots'
               color={colors.primaryTheme}
               height={49}
@@ -243,6 +245,10 @@ const Formcont = styled.div`
       background-color: #fff;
       color: ${colors.primaryTheme};
     }
+  }
+
+  .loader {
+    text-align: center;
   }
 `;
 

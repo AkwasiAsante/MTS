@@ -1,16 +1,20 @@
 import React from 'react';
-import Blink from 'react-blink-text';
 import {
   StyledTitle,
   StyledSubTitle,
   MyAvatar,
   StyledButton,
   ButtonGroup,
-  colors,
   BlinkContainer,
 } from '../components/Styles';
 import Logo from './../assets/Logo.png';
 
+function blink() {
+  // var f = document.getElementById('Foo');
+  setInterval(function () {
+    f.style.display = f.style.display == 'none' ? '' : 'none';
+  }, 1000);
+}
 const Home = () => {
   return (
     <div>
@@ -28,20 +32,10 @@ const Home = () => {
       >
         <MyAvatar image={Logo} />
       </div>
-      <BlinkContainer to='/campregister2021'>
-        <Blink
-          color='gold'
-          text='Youth Camp 2021 @ Panfokrom NVTI'
-          fontSize='2rem'
-        >
-          Youth Camp 2021 @ Panfokrom
-        </Blink>
-      </BlinkContainer>
-
       <StyledTitle size={65}>You're Welcome</StyledTitle>
+
       <StyledSubTitle size={27}>Buduburam District Youth</StyledSubTitle>
       <ButtonGroup>
-        {/* <StyledButton to='/signup'>Sign Up</StyledButton> */}
         <StyledButton to='/campregister2021'>Register</StyledButton>
         <StyledButton to='/login'>Login</StyledButton>
       </ButtonGroup>

@@ -41,7 +41,7 @@ function App({ checked }) {
             </StyledContainer>
           </BasicRoute>
 
-          <AuthRoute path='/dashboardh'>
+          <AuthRoute path='/dashboard'>
             <StyledContainerSecond>
               <Dashboard />
             </StyledContainerSecond>
