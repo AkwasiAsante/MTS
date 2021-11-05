@@ -16,11 +16,13 @@ const CampRegister = ({ campRegister }) => {
     fname: '',
     contact: '',
     church: '',
+    oname: '',
   });
   const [vegan, setVegan] = useState(false);
   const [district, setDistrict] = useState('Buduburam');
   const [ayclass, setAyclass] = useState('Pathfinder');
   const [gender, setGender] = useState('Male');
+  const [agerange, setAgerange] = useState('4 - 6yrs');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -52,13 +54,21 @@ const CampRegister = ({ campRegister }) => {
     },
     {
       id: 3,
+      name: 'oname',
+      type: 'text',
+      placeholder: 'Other Name(s)',
+      label: 'Other Name(s)',
+      maxlength: '32',
+    },
+    {
+      id: 4,
       name: 'contact',
       type: 'number',
       placeholder: 'Mobile Number',
       label: 'Contact #',
     },
     {
-      id: 4,
+      id: 5,
       name: 'church',
       type: 'text',
       placeholder: 'Local Church',
@@ -86,11 +96,10 @@ const CampRegister = ({ campRegister }) => {
     setIsSubmitting(true);
     e.preventDefault();
     await campRegister(
-      { ...data, gender, district, ayclass, vegan },
+      { ...data, gender, district, ayclass, vegan, agerange },
       history,
       setIsSubmitting
     );
-    // setIsSubmitting(false);
   };
   return (
     <Container>
@@ -154,6 +163,23 @@ const CampRegister = ({ campRegister }) => {
               <option value='Senior Youth'>SENIOR YOUTH</option>
             </select>
           </div>
+          <div>
+            <label>Age Range</label>
+            <select
+              name='agerange'
+              value={agerange}
+              onChange={(e) => {
+                const selectedAge = e.target.value;
+                setAgerange(selectedAge);
+              }}
+            >
+              <option value='4 - 6Yrs'>4 - 6Yrs</option>
+              <option value='7 - 9Yrs'>7 - 9Yrs</option>
+              <option value='4 - 6Yrs'>10 - 14Yrs</option>
+              <option value='15 - 17Yrs'>15 - 17Yrs</option>
+              <option value='18Yrs and Above'>18Yrs and Above</option>
+            </select>
+          </div>
           <div className='dietcont'>
             <label className='diet'>Are you a vegetarian ?</label>
             <input
@@ -174,7 +200,7 @@ const CampRegister = ({ campRegister }) => {
             />
             No
           </div>
-          {/* <button onClick={handleSubmit}>Submit</button> */}
+
           {!isSubmitting && <button type='submit'>Submit</button>}
 
           {isSubmitting && (
@@ -214,6 +240,8 @@ const Formcont = styled.div`
     margin: 10px 0px;
     border-radius: 5px;
     border: 1px solid gray;
+
+    line-height: 50px;
   }
   .dietcont {
     margin-top: 15px;

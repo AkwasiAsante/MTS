@@ -105,7 +105,7 @@ export default function ListCamp() {
   };
 
   const cols = [
-    { headerName: 'ID', field: '_id', width: 200 },
+    { headerName: 'ID', field: '_id', width: 200, hide: true },
     { headerName: 'First Name', field: 'fname', width: 200, flex: 1 },
     { headerName: 'Last Name', field: 'lname', width: 200, flex: 1 },
     { headerName: 'Gender', field: 'gender', width: 150, flex: 1 },
@@ -160,17 +160,29 @@ export default function ListCamp() {
       'Do you want to delete the seledted item ?'
     );
     console.log(id);
-    if (confirmDelete == true) {
-      await axios
-        .delete(apiCamp + `/` + id)
-        .then((response) => {
-          const { data } = response;
-          alert(data);
-        })
-        .catch((err) => {
-          console.log(err);
-          alert(data);
-        });
+    if (confirmDelete === true) {
+      axios.delete(apiCamp + `/delete/` + id).then((res) => {
+        alert(id + ' has been deleted successfully');
+        // alert(res);http://localhost:5000/camp
+        console.log(res);
+        console.log(res.status);
+      });
+      // setData(data.filter((item) => item.id !== id));
+      // setRows(data);
+      // http://localhost:500/camp/delete/618556dbe4f2e5e3cb30e5e8
+      // http://localhost:5000/camp/delete/6184dcd8857e18f246ab28ee
+      // await axios
+      //   .delete(`http://localhost:5000/camp/delete/` + id)
+      //   .then((response) => {
+      //     alert('success');
+      //     console.log(response);
+      //     setData(data.filter((item) => item.id !== id));
+      //     setRows(data);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      // });
     }
   };
   return (
@@ -181,7 +193,8 @@ export default function ListCamp() {
           rows={rows}
           columns={cols}
           disableColumnResize={true}
-          pageSize={25}
+          // pageSize={25}
+
           componentsProps={{
             toolbar: {
               value: searchText,
