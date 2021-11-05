@@ -2,13 +2,14 @@ import React from 'react';
 import {
   StyledFormWrapper,
   StyledFormButton,
-  Avatar,
+  MyAvatar,
   colors,
   StyledTitle,
   ButtonGroup,
   TextLink,
   ExtraText,
   CopyrightText,
+  StyledContainer,
 } from '../components/Styles';
 import Logo from '../assets/ay.jpg';
 import { Formik, Form } from 'formik';
@@ -27,7 +28,7 @@ const Login = ({ loginUser }) => {
   return (
     <div>
       <StyledFormWrapper>
-        <Avatar image={Logo} />
+        <MyAvatar image={Logo} />
         <StyledTitle size={30} color={colors.primaryTheme}>
           Member Login
         </StyledTitle>

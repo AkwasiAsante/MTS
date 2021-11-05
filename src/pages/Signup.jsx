@@ -2,7 +2,7 @@ import React from 'react';
 import {
   StyledFormWrapper,
   StyledFormButton,
-  Avatar,
+  MyAvatar,
   colors,
   StyledTitle,
   ButtonGroup,
@@ -32,7 +32,7 @@ const Signup = ({ signupUser }) => {
   return (
     <div>
       <StyledFormWrapper>
-        <Avatar image={Logo} />
+        <MyAvatar image={Logo} />
         <StyledTitle size={30} color={colors.primaryTheme}>
           Member Signup
         </StyledTitle>
@@ -60,6 +60,7 @@ const Signup = ({ signupUser }) => {
           })}
           onSubmit={(values, { setSubmitting, setFieldError }) => {
             signupUser(values, history, setFieldError, setSubmitting);
+            // console.log(values);
           }}
         >
           {({ isSubmitting }) => (

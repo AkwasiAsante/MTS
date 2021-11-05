@@ -16,3 +16,7 @@ const store = createStore(
 sessionService.initSessionService(store);
 
 export default store;
+
+export const apiMain = 'https://dry-forest-10776.herokuapp.com';
+
+export const apiCamp = apiMain + '/camp';

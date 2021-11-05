@@ -27,12 +27,90 @@ export const StyledContainer = styled.div`
   background-size: cover;
   background-attachment: fixed;
 `;
+export const StyledContainerSecond = styled.div`
+  min-height: 100vh;
+  display: flex;
 
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(${backgroundImage});
+  background-size: cover;
+  background-attachment: fixed;
+`;
+const TopbarStyled = styled.div`
+  height: 15%;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const BottomStyled = styled.div`
+  height: 75%;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const TopRight = styled.div`
+  background-color: 'transparent';
+  width: '100%';
+  padding: '15px';
+  display: 'flex';
+  flex: 11;
+`;
+
+const TopLeft = styled.div`
+  //flex: 1;
+  margin-right: 10px;
+`;
+
+const TopRightIcons = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const TopbarIconContainer = styled.div`
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #555;
+`;
+
+const TopAvatar = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+`;
+
+const TopIconBadge = styled.span`
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 3px;
+  right: 0px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+`;
 //Home
 export const StyledTitle = styled.h2`
   font-size: ${(props) => props.size}px;
   text-align: center;
   color: ${(props) => (props.color ? props.color : colors.primary)};
+  padding: 5px;
+  margin-bottom: 20px;
+`;
+
+export const BlinkContainer = styled(Link)`
+  text-align: center;
+  text-decoration: none;
+  text-align: center;
+  transition: ease-in-out 0.3s;
+  outline: 0;
   padding: 5px;
   margin-bottom: 20px;
 `;
@@ -45,7 +123,7 @@ export const StyledSubTitle = styled.p`
   margin-bottom: 25px;
 `;
 
-export const Avatar = styled.div`
+export const MyAvatar = styled.div`
   width: 80px;
   height: 60px;
   border-radius: 50%;
@@ -124,6 +202,11 @@ const StyledFormWrapper = styled.div`
   text-align: center;
   padding: 20px 55px;
   border-radius: 8px;
+
+  /* div {
+    display: flex;
+    flex-direction: row;
+  } */
 `;
 
 //Form Button
@@ -202,4 +285,12 @@ export {
   ExtraText,
   TextLink,
   CopyrightText,
+  TopbarStyled,
+  TopRight,
+  TopLeft,
+  BottomStyled,
+  TopRightIcons,
+  TopbarIconContainer,
+  TopAvatar,
+  TopIconBadge,
 };

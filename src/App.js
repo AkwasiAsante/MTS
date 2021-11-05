@@ -1,4 +1,4 @@
-import { StyledContainer } from './components/Styles';
+import { StyledContainer, StyledContainerSecond } from './components/Styles';
 //React Loader Spinner
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
@@ -13,28 +13,55 @@ import AuthRoute from './components/AuthRoute';
 import BasicRoute from './components/BasicRoute';
 import { connect } from 'react-redux';
 
+import CampRegister from './pages/CampRegister';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import CampList from './pages/CampList';
+import MUIGrid from './components/ListCamp';
+
 function App({ checked }) {
   return (
     <Router>
       {checked && (
-        <StyledContainer>
-          <Switch>
-            <BasicRoute path='/signup'>
+        <Switch>
+          <BasicRoute path='/signup'>
+            <StyledContainer>
               <Signup />
-            </BasicRoute>
-            <BasicRoute path='/login'>
+            </StyledContainer>
+          </BasicRoute>
+
+          <BasicRoute path='/campregister2021'>
+            <StyledContainer>
+              <CampRegister />
+            </StyledContainer>
+          </BasicRoute>
+
+          <BasicRoute path='/login'>
+            <StyledContainer>
               <Login />
-            </BasicRoute>
+            </StyledContainer>
+          </BasicRoute>
 
-            <AuthRoute path='/dashboard'>
+          <AuthRoute path='/dashboard'>
+            <StyledContainerSecond>
               <Dashboard />
-            </AuthRoute>
+            </StyledContainerSecond>
+          </AuthRoute>
+          <AuthRoute path='/admindashboard'>
+            <AdminDashboard />
+          </AuthRoute>
+          <AuthRoute path='/camplist'>
+            <CampList />
+          </AuthRoute>
+          {/* <Route path='/mts'>
+            <MUIGrid />
+          </Route> */}
 
-            <Route path='/'>
+          <Route path='/'>
+            <StyledContainer>
               <Home />
-            </Route>
-          </Switch>
-        </StyledContainer>
+            </StyledContainer>
+          </Route>
+        </Switch>
       )}
     </Router>
   );
