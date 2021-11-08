@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { DataGrid, GridToolbarExport } from '@mui/x-data-grid';
 import { apiCamp } from '../auth/store';
 import '../pages/userList/userList.css';
-
 import axios from 'axios';
-
 import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
 import { Clear, Search, DeleteOutline } from '@material-ui/icons';
-import { createTheme, TextField } from '@material-ui/core';
+import {
+  Backdrop,
+  CircularProgress,
+  createTheme,
+  TextField,
+} from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 
 function escapeRegExp(value) {
@@ -25,6 +28,19 @@ const useStyles = makeStyles(
         display: 'flex',
         alignItems: 'flex-start',
         flexWrap: 'wrap',
+
+        '& .MuiSvgIcon-root': {
+          fill: '#0074CC',
+        },
+
+        '& .MuiButton-label': {
+          color: '#0074CC',
+        },
+
+        '.MuiIconButton-root.Mui-disabled': {
+          color: 'pink',
+          backgroundColor: 'yellow',
+        },
       },
       textField: {
         [theme.breakpoints.down('xs')]: {
@@ -39,12 +55,6 @@ const useStyles = makeStyles(
           borderBottom: `1px solid ${theme.palette.divider}`,
         },
       },
-      toolbarContainer: {
-        button: {
-          fill: 'blue',
-          color: 'yellow',
-        },
-      },
     }),
   { defaultTheme }
 );
@@ -54,7 +64,8 @@ function QuickSearchToolbar(props) {
 
   return (
     <div className={classes.root}>
-      <div className={classes.toolbarContainer}>
+      <div>
+        {/* className={classes.toolbarContainer} */}
         <GridToolbarExport />
       </div>
       <TextField
@@ -89,9 +100,10 @@ QuickSearchToolbar.propTypes = {
 
 export default function ListCamp() {
   const [data, setData] = useState([]);
-
   const [searchText, setSearchText] = useState('');
   const [rows, setRows] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [pageSize, setPageSize] = React.useState(5);
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
@@ -107,21 +119,21 @@ export default function ListCamp() {
   const cols = [
     { headerName: 'ID', field: '_id', width: 200, hide: true },
     { headerName: 'First Name', field: 'fname', width: 200, flex: 1 },
-    { headerName: 'Last Name', field: 'lname', width: 200, flex: 1 },
-    { headerName: 'Gender', field: 'gender', width: 150, flex: 1 },
+    { headerName: 'Other Name(s)', field: 'lname', width: 200, flex: 1.5 },
+    { headerName: 'Gender', field: 'gender', width: 150, flex: 0.8 },
     { headerName: 'Class', field: 'ayclass', width: 200, flex: 1 },
     { headerName: 'District', field: 'district', width: 200, flex: 1 },
     {
       field: 'vegan',
       headerName: 'Is Vegan?',
-      width: 150,
+      width: 120,
       type: 'boolean',
-      flex: 1,
+      flex: 0.8,
     },
     {
       field: 'action',
       headerName: 'Action',
-      width: 150,
+      width: 120,
       flex: 1,
       renderCell: (params) => {
         return (
@@ -142,11 +154,13 @@ export default function ListCamp() {
 
   useEffect(() => {
     const getData = async () => {
+      setIsLoading(true);
       await axios
         .get(apiCamp + `/list`)
         .then((response) => {
           setData(response.data);
           setRows(response.data);
+          setIsLoading(false);
         })
         .catch((err) => {
           console.log(err);
@@ -171,24 +185,34 @@ export default function ListCamp() {
     }
   };
   return (
-    <div className='mtable'>
-      <div style={{ height: '83vh', width: '98.5%', margin: '10px 10px' }}>
-        <DataGrid
-          components={{ Toolbar: QuickSearchToolbar }}
-          rows={rows}
-          columns={cols}
-          disableColumnResize={true}
-          // pageSize={25}
-
-          componentsProps={{
-            toolbar: {
-              value: searchText,
-              onChange: (event) => requestSearch(event.target.value),
-              clearSearch: () => requestSearch(''),
-            },
-          }}
-        />
-      </div>
-    </div>
+    <>
+      {isLoading && (
+        <Backdrop sx={{ color: '#fff', zIndex: 1000 }} open>
+          <CircularProgress color='inherit' />
+        </Backdrop>
+      )}
+      {!isLoading && (
+        <div className='mtable'>
+          <div style={{ height: '100vh', width: '98.5%', margin: '10px 10px' }}>
+            <DataGrid
+              pageSize={pageSize}
+              onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+              rowsPerPageOptions={[5, 10, 20]}
+              pagination
+              components={{ Toolbar: QuickSearchToolbar }}
+              rows={rows}
+              columns={cols}
+              componentsProps={{
+                toolbar: {
+                  value: searchText,
+                  onChange: (event) => requestSearch(event.target.value),
+                  clearSearch: () => requestSearch(''),
+                },
+              }}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }

@@ -175,7 +175,7 @@ const CampRegister = ({ campRegister }) => {
             >
               <option value='4 - 6Yrs'>4 - 6Yrs</option>
               <option value='7 - 9Yrs'>7 - 9Yrs</option>
-              <option value='4 - 6Yrs'>10 - 14Yrs</option>
+              <option value='10 - 14Yrs'>10 - 14Yrs</option>
               <option value='15 - 17Yrs'>15 - 17Yrs</option>
               <option value='18Yrs and Above'>18Yrs and Above</option>
             </select>

@@ -24,6 +24,10 @@ export const campRegister = (credentials, history, setIsSubmitting) => {
         } else if (data.status === 'SUCCESS') {
           setIsSubmitting(false);
           alert(`SUCCESS\n` + message);
+          // return (
+
+          // );
+
           // console.log();
           history.push('/');
         }

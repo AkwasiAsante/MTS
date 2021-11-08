@@ -16,13 +16,14 @@ import { connect } from 'react-redux';
 import CampRegister from './pages/CampRegister';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import CampList from './pages/CampList';
+import Chart from './components/chart/Chart';
 
 function App({ checked }) {
   return (
     <Router>
       {checked && (
         <Switch>
-          <BasicRoute path='/signup'>
+          <BasicRoute path='/signup/new-user'>
             <StyledContainer>
               <Signup />
             </StyledContainer>

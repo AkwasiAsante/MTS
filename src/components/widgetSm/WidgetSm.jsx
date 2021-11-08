@@ -7,76 +7,14 @@ import {
   InsertDriveFile,
   FolderOutlined,
 } from '@material-ui/icons';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { apiCamp } from '../../auth/store';
 
-export default function WidgetSm() {
-  const [buduStats, setBuduStats] = useState();
-  const [kasoaStats, setKasoaStats] = useState();
-  const [othersStats, setOthersStats] = useState();
-  const [maleStats, setMaleStats] = useState();
-  const [femaleStats, setFemaleStats] = useState();
-
-  useEffect(() => {
-    const getBuduburam = async () => {
-      await axios
-        .get(apiCamp + '/buduburam')
-        .then((response) => {
-          setBuduStats(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    const getKasoa = async () => {
-      await axios
-        .get(apiCamp + '/kasoa')
-        .then((response) => {
-          setKasoaStats(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const getOthers = async () => {
-      await axios
-        .get(apiCamp + '/others')
-        .then((response) => {
-          setOthersStats(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const getMale = async () => {
-      await axios
-        .get(apiCamp + '/male')
-        .then((response) => {
-          setMaleStats(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const getFemale = async () => {
-      await axios
-        .get(apiCamp + '/female')
-        .then((response) => {
-          setFemaleStats(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    getBuduburam();
-    getKasoa();
-    getOthers();
-    getMale();
-    getFemale();
-  }, []);
+export default function WidgetSm({
+  buduStats,
+  kasoaStats,
+  othersStats,
+  maleStats,
+  femaleStats,
+}) {
   return (
     <div className='widgetSm'>
       <p className='widgetSmTitle'>Statistics</p>
