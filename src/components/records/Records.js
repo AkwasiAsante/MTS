@@ -112,7 +112,7 @@ const Records = () => {
       setMessageDialog({
         isOpen: true,
         title: 'Success Message !',
-        subTitle: _id + ' Record has been deleted successfully',
+        subTitle: 'Record has been deleted successfully',
       });
     });
     getData();
@@ -199,20 +199,21 @@ const Records = () => {
                     >
                       Edit
                     </button>
-
-                    <DeleteOutline
-                      className='userListDelete'
-                      onClick={() =>
-                        setConfirmDialog({
-                          isOpen: true,
-                          title: 'Are you sure to delete this record?',
-                          subTitle: "You can't undo this operation.",
-                          onConfirm: () => {
-                            handleDelete(item._id);
-                          },
-                        })
-                      }
-                    />
+                    <button className='userListDelete-con'>
+                      <DeleteOutline
+                        className='userListDelete'
+                        onClick={() =>
+                          setConfirmDialog({
+                            isOpen: true,
+                            title: 'Are you sure to delete this record?',
+                            subTitle: "You can't undo this operation.",
+                            onConfirm: () => {
+                              handleDelete(item._id);
+                            },
+                          })
+                        }
+                      />{' '}
+                    </button>
                   </TableCell>
                 </TableRow>
               ))}

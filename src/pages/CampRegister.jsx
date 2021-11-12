@@ -137,15 +137,7 @@ const CampRegister = ({ campRegister }) => {
 
   //DELETE CID
   const handleDelete = async (_id) => {
-    // const url = `${apiCamp}/delete/${_id}`;
-
-    await axios.delete(apiUserids + '/delete/' + _id).then((res) => {
-      setMessageDialog({
-        isOpen: true,
-        title: 'Success Message !',
-        subTitle: _id + ' Record has been deleted successfully',
-      });
-    });
+    await axios.delete(apiUserids + '/delete/' + _id).then((res) => {});
   };
 
   useEffect(() => {
