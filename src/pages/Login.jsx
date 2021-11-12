@@ -6,10 +6,7 @@ import {
   colors,
   StyledTitle,
   ButtonGroup,
-  TextLink,
-  ExtraText,
   CopyrightText,
-  StyledContainer,
 } from '../components/Styles';
 import Logo from '../assets/ay.jpg';
 import { Formik, Form } from 'formik';

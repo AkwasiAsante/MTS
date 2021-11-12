@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid, GridToolbarExport } from '@mui/x-data-grid';
 import { apiCamp } from '../auth/store';
-import '../pages/userList/userList.css';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,6 +12,8 @@ import {
   TextField,
 } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
+import EditRegister from './EditRegister';
+import Popup from './Popup';
 
 function escapeRegExp(value) {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
@@ -55,6 +56,9 @@ const useStyles = makeStyles(
           borderBottom: `1px solid ${theme.palette.divider}`,
         },
       },
+      '& .MuiDataGrid-root .MuiDataGrid-root': {
+        overflowY: 'hidden',
+      },
     }),
   { defaultTheme }
 );
@@ -65,7 +69,6 @@ function QuickSearchToolbar(props) {
   return (
     <div className={classes.root}>
       <div>
-        {/* className={classes.toolbarContainer} */}
         <GridToolbarExport />
       </div>
       <TextField
@@ -98,12 +101,13 @@ QuickSearchToolbar.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-export default function ListCamp() {
+const ListCamp = () => {
+  const [openPopup, setOpenPopup] = useState(false);
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [rows, setRows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [pageSize, setPageSize] = React.useState(5);
+  const [pageSize, setPageSize] = useState(25);
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
@@ -138,9 +142,9 @@ export default function ListCamp() {
       renderCell: (params) => {
         return (
           <>
-            {/* <Link to={'/user/' + params.row.id}>
-            </Link> */}
-            <button className='userListEdit'>Edit</button>
+            <button className='userListEdit' onClick={() => setOpenPopup(true)}>
+              Edit
+            </button>
 
             <DeleteOutline
               className='userListDelete'
@@ -184,6 +188,9 @@ export default function ListCamp() {
       });
     }
   };
+  const handleEdit = () => {
+    setOpenPopup(true);
+  };
   return (
     <>
       {isLoading && (
@@ -197,7 +204,7 @@ export default function ListCamp() {
             <DataGrid
               pageSize={pageSize}
               onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-              rowsPerPageOptions={[5, 10, 20]}
+              rowsPerPageOptions={[10, 25, 50]}
               pagination
               components={{ Toolbar: QuickSearchToolbar }}
               rows={rows}
@@ -213,6 +220,16 @@ export default function ListCamp() {
           </div>
         </div>
       )}
+
+      <Popup
+        openPop={openPopup}
+        setOpenPop={setOpenPopup}
+        title='Edit Registration'
+      >
+        <EditRegister />
+      </Popup>
     </>
   );
-}
+};
+
+export default ListCamp;

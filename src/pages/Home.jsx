@@ -6,7 +6,6 @@ import {
   MyAvatar,
   StyledButton,
   ButtonGroup,
-  BlinkContainer,
 } from '../components/Styles';
 import Logo from './../assets/Logo.png';
 import './home.css';

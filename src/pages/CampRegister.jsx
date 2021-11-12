@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MyAvatar, StyledTitle, colors } from '../components/Styles';
 import Logo from '../assets/ay.jpg';
@@ -8,6 +8,9 @@ import { campRegister } from '../auth/actions/registerAction';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import MessageDialog from '../components/controls/MessageDialog';
+import { apiUserids } from '../auth/store';
 
 const CampRegister = ({ campRegister }) => {
   const history = useHistory();
@@ -23,8 +26,16 @@ const CampRegister = ({ campRegister }) => {
   const [ayclass, setAyclass] = useState('Pathfinder');
   const [gender, setGender] = useState('Male');
   const [agerange, setAgerange] = useState('4 - 6yrs');
+  const [cid, setCID] = useState();
+  const [id, setId] = useState();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [messageDialog, setMessageDialog] = useState({
+    isOpen: false,
+    title: '',
+    subTitle: '',
+  });
 
   const inputs = [
     {
@@ -35,7 +46,7 @@ const CampRegister = ({ campRegister }) => {
       errorMessage:
         "Name should be 3-32 characters and shouldn't include any special character!",
       label: 'First Name',
-      maxlength: '32',
+      maxLength: '32',
       pattern: '^[A-Za-z0-9 ]{3,32}$',
       required: true,
     },
@@ -47,7 +58,7 @@ const CampRegister = ({ campRegister }) => {
       errorMessage:
         "Name should be 3-32 characters and shouldn't include any special character!",
       label: 'Last Name',
-      maxlength: '32',
+      maxLength: '32',
       pattern: '^[A-Za-z0-9 ]{3,32}$',
       // pattern: '[A-Za-z]{1,32}',
       required: true,
@@ -58,7 +69,7 @@ const CampRegister = ({ campRegister }) => {
       type: 'text',
       placeholder: 'Other Name(s)',
       label: 'Other Name(s)',
-      maxlength: '32',
+      maxLength: '32',
     },
     {
       id: 4,
@@ -66,6 +77,8 @@ const CampRegister = ({ campRegister }) => {
       type: 'number',
       placeholder: 'Mobile Number',
       label: 'Contact #',
+      maxLength: '12',
+      minLength: '10',
     },
     {
       id: 5,
@@ -78,14 +91,6 @@ const CampRegister = ({ campRegister }) => {
     },
   ];
 
-  const Capitalizeme = (str) => {
-    const arr = str.split(' ');
-    for (var i = 0; i < arr.length; i++) {
-      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
-    }
-    const str2 = arr.join(' ');
-  };
-
   const onChange = (e) => {
     setData({
       ...data,
@@ -95,126 +100,180 @@ const CampRegister = ({ campRegister }) => {
   const handleSubmit = async (e) => {
     setIsSubmitting(true);
     e.preventDefault();
+    console.log(cid);
+    await getCID();
+
     await campRegister(
-      { ...data, gender, district, ayclass, vegan, agerange },
+      { ...data, gender, district, ayclass, vegan, agerange, cid },
       history,
-      setIsSubmitting
+      setIsSubmitting,
+      setIsSuccess
     );
+
+    await handleDelete(id);
+
+    if (isSuccess === true) {
+      setMessageDialog({
+        isOpen: true,
+        title: 'Success Message !!',
+        subTitle: 'You have successfully registered for youth camp 2021.',
+      });
+    }
   };
+
+  //GET CID
+  const getCID = async () => {
+    await axios
+      .get(apiUserids + '/list?new=true')
+      .then((response) => {
+        const { cid, _id } = response.data[0];
+        setCID(cid);
+        setId(_id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //DELETE CID
+  const handleDelete = async (_id) => {
+    // const url = `${apiCamp}/delete/${_id}`;
+
+    await axios.delete(apiUserids + '/delete/' + _id).then((res) => {
+      setMessageDialog({
+        isOpen: true,
+        title: 'Success Message !',
+        subTitle: _id + ' Record has been deleted successfully',
+      });
+    });
+  };
+
+  useEffect(() => {
+    getCID();
+  }, []);
+
   return (
-    <Container>
-      <Formcont>
-        <MyAvatar image={Logo} />
-        <StyledTitle size={30} color={colors.primaryTheme}>
-          Registration
-        </StyledTitle>
-        <p>Youth Camp 2021 @ Panfokrom NVTI</p>
+    <>
+      <Container>
+        <Formcont>
+          <MyAvatar image={Logo} />
+          <StyledTitle size={30} color={colors.primaryTheme}>
+            Registration
+          </StyledTitle>
+          <p>Youth Camp 2021 @ Panfokrom NVTI</p>
 
-        <form onSubmit={handleSubmit}>
-          {inputs.map((input) => (
-            <FormInput
-              key={input.id}
-              {...input}
-              value={data[input.name]}
-              onChange={onChange}
-            />
-          ))}
-          <div>
-            <label>Gender</label>
-            <select
-              name='gender'
-              value={gender}
-              onChange={(e) => {
-                const selectedGender = e.target.value;
-                setGender(selectedGender);
-              }}
-            >
-              <option value='Male'>MALE</option>
-              <option value='Female'>FEMALE</option>
-            </select>
-          </div>
-          <div>
-            <label>District</label>
-            <select
-              name='district'
-              value={district}
-              onChange={(e) => {
-                const selectedDistrict = e.target.value;
-                setDistrict(selectedDistrict);
-              }}
-            >
-              <option value='Buduburam'>BUDUBURAM</option>
-              <option value='Kasoa West'>KASOA WEST</option>
-              <option value='Others'>OTHERS</option>
-            </select>
-          </div>
-          <div>
-            <label>AY Class</label>
-            <select
-              name='ayclass'
-              value={ayclass}
-              onChange={(e) => {
-                const selectedAYclass = e.target.value;
-                setAyclass(selectedAYclass);
-              }}
-            >
-              <option value='Adventurer'>ADVENTURER</option>
-              <option value='Pathfinder'>PATHFINDER</option>
-              <option value='Senior Youth'>SENIOR YOUTH</option>
-            </select>
-          </div>
-          <div>
-            <label>Age Range</label>
-            <select
-              name='agerange'
-              value={agerange}
-              onChange={(e) => {
-                const selectedAge = e.target.value;
-                setAgerange(selectedAge);
-              }}
-            >
-              <option value='4 - 6Yrs'>4 - 6Yrs</option>
-              <option value='7 - 9Yrs'>7 - 9Yrs</option>
-              <option value='10 - 14Yrs'>10 - 14Yrs</option>
-              <option value='15 - 17Yrs'>15 - 17Yrs</option>
-              <option value='18Yrs and Above'>18Yrs and Above</option>
-            </select>
-          </div>
-          <div className='dietcont'>
-            <label className='diet'>Are you a vegetarian ?</label>
-            <input
-              type='radio'
-              value='true'
-              name='vegan'
-              onChange={(e) => setVegan(true)}
-              checked={vegan === true}
-            />
-            Yes
-            <input
-              className='radioB'
-              type='radio'
-              value='false'
-              name='vegan'
-              onChange={(e) => setVegan(false)}
-              checked={vegan === false}
-            />
-            No
-          </div>
+          <form onSubmit={handleSubmit}>
+            {inputs.map((input) => (
+              <FormInput
+                key={input.id}
+                {...input}
+                value={data[input.name]}
+                onChange={onChange}
+              />
+            ))}
+            <div>
+              <label>Gender</label>
+              <select
+                name='gender'
+                value={gender}
+                onChange={(e) => {
+                  const selectedGender = e.target.value;
+                  setGender(selectedGender);
+                }}
+              >
+                <option value='Male'>MALE</option>
+                <option value='Female'>FEMALE</option>
+              </select>
+            </div>
+            <div>
+              <label>District</label>
+              <select
+                name='district'
+                value={district}
+                onChange={(e) => {
+                  const selectedDistrict = e.target.value;
+                  setDistrict(selectedDistrict);
+                }}
+              >
+                <option value='Buduburam'>BUDUBURAM</option>
+                <option value='Kasoa West'>KASOA WEST</option>
+                <option value='Others'>OTHERS</option>
+              </select>
+            </div>
+            <div>
+              <label>AY Class</label>
+              <select
+                name='ayclass'
+                value={ayclass}
+                onChange={(e) => {
+                  const selectedAYclass = e.target.value;
+                  setAyclass(selectedAYclass);
+                }}
+              >
+                <option value='Adventurer'>ADVENTURER</option>
+                <option value='Pathfinder'>PATHFINDER</option>
+                <option value='Senior Youth'>SENIOR YOUTH</option>
+              </select>
+            </div>
+            <div>
+              <label>Age Range</label>
+              <select
+                name='agerange'
+                value={agerange}
+                onChange={(e) => {
+                  const selectedAge = e.target.value;
+                  setAgerange(selectedAge);
+                }}
+              >
+                <option value='4 - 6Yrs'>4 - 6Yrs</option>
+                <option value='7 - 9Yrs'>7 - 9Yrs</option>
+                <option value='10 - 14Yrs'>10 - 14Yrs</option>
+                <option value='15 - 17Yrs'>15 - 17Yrs</option>
+                <option value='18Yrs & Above'>18Yrs & Above</option>
+              </select>
+            </div>
+            <div className='dietcont'>
+              <label className='diet'>Are you a vegetarian ?</label>
+              <input
+                type='radio'
+                value='true'
+                name='vegan'
+                onChange={(e) => setVegan(true)}
+                checked={vegan === true}
+              />
+              Yes
+              <input
+                className='radioB'
+                type='radio'
+                value='false'
+                name='vegan'
+                onChange={(e) => setVegan(false)}
+                checked={vegan === false}
+              />
+              No
+            </div>
 
-          {!isSubmitting && <button type='submit'>Submit</button>}
+            {!isSubmitting && <button type='submit'>Submit</button>}
 
-          {isSubmitting && (
-            <Loader
-              className='loader'
-              type='ThreeDots'
-              color={colors.primaryTheme}
-              height={49}
-              width={100}
-            />
-          )}
-        </form>
-      </Formcont>
-    </Container>
+            {isSubmitting && (
+              <Loader
+                className='loader'
+                type='ThreeDots'
+                color={colors.primaryTheme}
+                height={49}
+                width={100}
+              />
+            )}
+          </form>
+        </Formcont>
+      </Container>
+
+      <MessageDialog
+        messageDialog={messageDialog}
+        setMessageDialog={setMessageDialog}
+        formType={1}
+      />
+    </>
   );
 };
 const Container = styled.div``;

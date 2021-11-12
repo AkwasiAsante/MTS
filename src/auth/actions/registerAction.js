@@ -1,8 +1,12 @@
 import axios from 'axios';
-import { sessionService } from 'redux-react-session';
 import { apiCamp } from '../store';
 
-export const campRegister = (credentials, history, setIsSubmitting) => {
+export const campRegister = (
+  credentials,
+  history,
+  setIsSubmitting,
+  setIsSuccess
+) => {
   return () => {
     axios
       .post(apiCamp + '/register', credentials, {
@@ -15,26 +19,19 @@ export const campRegister = (credentials, history, setIsSubmitting) => {
 
         const { message } = data;
         if (data.status === 'FAILED') {
-          //Checking for specific erros
-
-          alert(`FAILED\n` + message);
-          console.log(message);
-          //complete submission
+          setIsSuccess(false);
           setIsSubmitting(false);
         } else if (data.status === 'SUCCESS') {
           setIsSubmitting(false);
-          alert(`SUCCESS\n` + message);
-          // return (
+          setIsSuccess(true);
 
-          // );
-
-          // console.log();
-          history.push('/');
+          // history.push('/');
         }
       })
       .catch((err) => {
         console.error(err);
         setIsSubmitting(false);
+        setIsSuccess(true);
       });
   };
 };

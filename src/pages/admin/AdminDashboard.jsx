@@ -8,6 +8,7 @@ import axios from 'axios';
 import Chart from '../../components/chart/Chart';
 import { apiCamp } from '../../auth/store';
 import { Backdrop, CircularProgress } from '@material-ui/core';
+
 const AdminDashboard = () => {
   const [userData, setUserData] = useState([]);
   const [stats, setStats] = useState();
@@ -176,7 +177,7 @@ const AdminDashboard = () => {
     <div>
       {/* <!-- header section starts  --> */}
       <Header />
-
+    
       {isLoading && (
         <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

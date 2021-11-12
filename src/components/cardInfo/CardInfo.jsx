@@ -3,10 +3,6 @@ import Logo from '../../assets/ay.jpg';
 import Pathfinder from '../../assets/pathfinder.jpg';
 import Ad from '../../assets/ad.png';
 import Mg from '../../assets/mg.png';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { apiCamp } from '../../auth/store';
-import { Backdrop, CircularProgress } from '@material-ui/core';
 
 export default function CardInfo({
   stats,

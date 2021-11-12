@@ -5,7 +5,6 @@ import {
   FileCopy,
   Description,
   InsertDriveFile,
-  FolderOutlined,
 } from '@material-ui/icons';
 
 export default function WidgetSm({
