@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid, GridToolbarExport } from '@mui/x-data-grid';
 import { apiCamp } from '../auth/store';
-import '../pages/userList/userList.css';
-
 import axios from 'axios';
-
 import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
 import { Clear, Search, DeleteOutline } from '@material-ui/icons';
-import { createTheme, TextField } from '@material-ui/core';
+import {
+  Backdrop,
+  CircularProgress,
+  createTheme,
+  TextField,
+} from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
+import EditRegister from './EditRegister';
+import Popup from './Popup';
 
 function escapeRegExp(value) {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
@@ -25,6 +29,19 @@ const useStyles = makeStyles(
         display: 'flex',
         alignItems: 'flex-start',
         flexWrap: 'wrap',
+
+        '& .MuiSvgIcon-root': {
+          fill: '#0074CC',
+        },
+
+        '& .MuiButton-label': {
+          color: '#0074CC',
+        },
+
+        '.MuiIconButton-root.Mui-disabled': {
+          color: 'pink',
+          backgroundColor: 'yellow',
+        },
       },
       textField: {
         [theme.breakpoints.down('xs')]: {
@@ -39,11 +56,8 @@ const useStyles = makeStyles(
           borderBottom: `1px solid ${theme.palette.divider}`,
         },
       },
-      toolbarContainer: {
-        button: {
-          fill: 'blue',
-          color: 'yellow',
-        },
+      '& .MuiDataGrid-root .MuiDataGrid-root': {
+        overflowY: 'hidden',
       },
     }),
   { defaultTheme }
@@ -54,7 +68,7 @@ function QuickSearchToolbar(props) {
 
   return (
     <div className={classes.root}>
-      <div className={classes.toolbarContainer}>
+      <div>
         <GridToolbarExport />
       </div>
       <TextField
@@ -87,11 +101,13 @@ QuickSearchToolbar.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-export default function ListCamp() {
+const ListCamp = () => {
+  const [openPopup, setOpenPopup] = useState(false);
   const [data, setData] = useState([]);
-
   const [searchText, setSearchText] = useState('');
   const [rows, setRows] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [pageSize, setPageSize] = useState(25);
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
@@ -107,32 +123,32 @@ export default function ListCamp() {
   const cols = [
     { headerName: 'ID', field: '_id', width: 200, hide: true },
     { headerName: 'First Name', field: 'fname', width: 200, flex: 1 },
-    { headerName: 'Last Name', field: 'lname', width: 200, flex: 1 },
-    { headerName: 'Gender', field: 'gender', width: 150, flex: 1 },
+    { headerName: 'Other Name(s)', field: 'lname', width: 200, flex: 1.5 },
+    { headerName: 'Gender', field: 'gender', width: 150, flex: 0.8 },
     { headerName: 'Class', field: 'ayclass', width: 200, flex: 1 },
     { headerName: 'District', field: 'district', width: 200, flex: 1 },
     {
       field: 'vegan',
       headerName: 'Is Vegan?',
-      width: 150,
+      width: 120,
       type: 'boolean',
-      flex: 1,
+      flex: 0.8,
     },
     {
       field: 'action',
       headerName: 'Action',
-      width: 150,
+      width: 120,
       flex: 1,
       renderCell: (params) => {
         return (
           <>
-            {/* <Link to={'/user/' + params.row.id}>
-            </Link> */}
-            <button className='userListEdit'>Edit</button>
+            <button className='userListEdit' onClick={() => setOpenPopup(true)}>
+              Edit
+            </button>
 
             <DeleteOutline
               className='userListDelete'
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
@@ -142,11 +158,13 @@ export default function ListCamp() {
 
   useEffect(() => {
     const getData = async () => {
+      setIsLoading(true);
       await axios
         .get(apiCamp + `/list`)
         .then((response) => {
           setData(response.data);
           setRows(response.data);
+          setIsLoading(false);
         })
         .catch((err) => {
           console.log(err);
@@ -155,55 +173,63 @@ export default function ListCamp() {
     getData();
   }, []);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (_id) => {
     let confirmDelete = window.confirm(
       'Do you want to delete the seledted item ?'
     );
-    console.log(id);
+
     if (confirmDelete === true) {
-      axios.delete(apiCamp + `/delete/` + id).then((res) => {
-        alert(id + ' has been deleted successfully');
-        // alert(res);http://localhost:5000/camp
-        console.log(res);
-        console.log(res.status);
+      const url = `${apiCamp}/delete/${_id}`;
+
+      await axios.delete(url).then((res) => {
+        alert(_id + ' has been deleted successfully');
+        // setData(data.filter((item) => item.id !== _id));
+        setRows(data);
       });
-      // setData(data.filter((item) => item.id !== id));
-      // setRows(data);
-      // http://localhost:500/camp/delete/618556dbe4f2e5e3cb30e5e8
-      // http://localhost:5000/camp/delete/6184dcd8857e18f246ab28ee
-      // await axios
-      //   .delete(`http://localhost:5000/camp/delete/` + id)
-      //   .then((response) => {
-      //     alert('success');
-      //     console.log(response);
-      //     setData(data.filter((item) => item.id !== id));
-      //     setRows(data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      // });
     }
   };
+  const handleEdit = () => {
+    setOpenPopup(true);
+  };
   return (
-    <div className='mtable'>
-      <div style={{ height: '83vh', width: '98.5%', margin: '10px 10px' }}>
-        <DataGrid
-          components={{ Toolbar: QuickSearchToolbar }}
-          rows={rows}
-          columns={cols}
-          disableColumnResize={true}
-          // pageSize={25}
+    <>
+      {isLoading && (
+        <Backdrop sx={{ color: '#fff', zIndex: 1000 }} open>
+          <CircularProgress color='inherit' />
+        </Backdrop>
+      )}
+      {!isLoading && (
+        <div className='mtable'>
+          <div style={{ height: '100vh', width: '98.5%', margin: '10px 10px' }}>
+            <DataGrid
+              pageSize={pageSize}
+              onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+              rowsPerPageOptions={[10, 25, 50]}
+              pagination
+              components={{ Toolbar: QuickSearchToolbar }}
+              rows={rows}
+              columns={cols}
+              componentsProps={{
+                toolbar: {
+                  value: searchText,
+                  onChange: (event) => requestSearch(event.target.value),
+                  clearSearch: () => requestSearch(''),
+                },
+              }}
+            />
+          </div>
+        </div>
+      )}
 
-          componentsProps={{
-            toolbar: {
-              value: searchText,
-              onChange: (event) => requestSearch(event.target.value),
-              clearSearch: () => requestSearch(''),
-            },
-          }}
-        />
-      </div>
-    </div>
+      <Popup
+        openPop={openPopup}
+        setOpenPop={setOpenPopup}
+        title='Edit Registration'
+      >
+        <EditRegister />
+      </Popup>
+    </>
   );
-}
+};
+
+export default ListCamp;

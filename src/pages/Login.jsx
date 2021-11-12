@@ -6,10 +6,7 @@ import {
   colors,
   StyledTitle,
   ButtonGroup,
-  TextLink,
-  ExtraText,
   CopyrightText,
-  StyledContainer,
 } from '../components/Styles';
 import Logo from '../assets/ay.jpg';
 import { Formik, Form } from 'formik';
@@ -86,9 +83,9 @@ const Login = ({ loginUser }) => {
             </Form>
           )}
         </Formik>
-        <ExtraText size={14}>
+        {/* <ExtraText size={14}>
           New here ? <TextLink to='/signup'>Sign up</TextLink>
-        </ExtraText>
+        </ExtraText> */}
       </StyledFormWrapper>
 
       <CopyrightText>All rights reserved &copy;2021</CopyrightText>

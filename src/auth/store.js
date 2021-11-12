@@ -17,6 +17,7 @@ sessionService.initSessionService(store);
 
 export default store;
 
-export const apiMain = 'https://dry-forest-10776.herokuapp.com';
+export const apiMain = 'https://shrouded-anchorage-53550.herokuapp.com';
 
 export const apiCamp = apiMain + '/camp';
+export const apiUserids = apiMain + '/userids';

@@ -1,0 +1,16 @@
+.chart {
+  height: 300px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  padding: 20px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+.chartTitle {
+  margin-bottom: 20px;
+}
+
+.chart .chartArea {
+  overflow-y: hidden;
+}
