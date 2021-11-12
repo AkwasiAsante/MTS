@@ -14,9 +14,9 @@ import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
-    padding: theme.spacing(2),
-    position: 'absolute',
-    top: theme.spacing(5),
+    // padding: theme.spacing(2),
+    // position: 'absolute',
+    // top: theme.spacing(5),
   },
   dialogTitle: {
     textAlign: 'center',
