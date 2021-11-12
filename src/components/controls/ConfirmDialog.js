@@ -13,9 +13,9 @@ import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
-    padding: theme.spacing(2),
-    position: 'absolute',
-    top: theme.spacing(5),
+    // padding: theme.spacing(2),
+    // position: 'absolute',
+    // top: theme.spacing(5),
   },
   dialogTitle: {
     textAlign: 'center',
