@@ -23,12 +23,15 @@ import {
   SignalCellularNullRounded,
   Clear,
 } from '@material-ui/icons';
-import Input from '../controls/Input';
+
 import EditRegister from '../EditRegister';
 import Popup from '../Popup';
 import ConfirmDialog from '../controls/ConfirmDialog';
 import MessageDialog from '../controls/MessageDialog';
 import { createStyles } from '@material-ui/styles';
+
+import SearchIcon from '@material-ui/icons/Search';
+import CloseIcon from '@material-ui/icons/Close';
 
 const headCells = [
   { id: 'cid', label: 'CID' },
@@ -104,6 +107,7 @@ const Records = () => {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
+  // const serachValue = document.getElementById('searchInputBox');
 
   const {
     TblContainer,
@@ -183,31 +187,26 @@ const Records = () => {
       {!isLoading && (
         <>
           <Toolbar className={classes.root}>
-            {/* <Input
-              label='Search Camper'
-              // InputProps={{
-              //   startAdornment: (
-              //     <InputAdornment position='start'>
-              //       <Search />
-              //     </InputAdornment>
-              //   ),
-              // }}
-              onChange={handleSearch}
+            <div className='searchInputs'>
+              <input
+                id='searchInputBox'
+                type='text'
+                placeholder='Search Information'
+                onChange={handleSearch}
+              />
+              <div className='searchIcon'>
+                {/* {serachValue.value.length === 0 ? ( */}
+                <SearchIcon />
+                {/* ) : (
+                  <CloseIcon id='clearBtn' onClick={(serachValue.value = '')} />
+                )} */}
+              </div>
+            </div>
+            {/* <SearchInput
+              handleOnChange={handleSearch}
+              placeholder='Search Information'
             /> */}
-
-            <input
-              className='SearchInput'
-              label='Search'
-              name='search'
-              placeholder='Search Camper'
-              onChange={handleSearch}
-            />
-
-            <Button
-              // classes={{ root: classes.btnExport }}
-              vairent='outlined'
-              startIcon={<ArrowDownward />}
-            >
+            <Button vairent='outlined' startIcon={<ArrowDownward />}>
               Export
             </Button>
           </Toolbar>

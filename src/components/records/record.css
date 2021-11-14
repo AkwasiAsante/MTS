@@ -20,7 +20,7 @@
   cursor: pointer;
   font-size: 15px !important;
 }
-
+/* 
 .SearchInput {
   font-size: 16px;
   border-radius: 5px;
@@ -32,4 +32,37 @@
 .SearchInput[type='text']:focus,
 .SearchInput:hover {
   border: 2px solid blue;
+} */
+
+.searchInputs {
+  display: flex;
+  border: 1px solid grey;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  width: 50%;
+}
+.searchInputs input {
+  background-color: white;
+  border: 0;
+  font-size: 15px;
+  padding: 12px;
+
+  width: 90%;
+}
+
+.searchIcon {
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  display: grid;
+  place-items: center;
+}
+
+input:focus {
+  outline: none;
+}
+.searchIcon svg {
+  font-size: 25px;
+  color: grey !important;
 }
