@@ -7,6 +7,8 @@ import {
   Backdrop,
   Button,
   CircularProgress,
+  createTheme,
+  IconButton,
   InputAdornment,
   makeStyles,
   TableBody,
@@ -19,12 +21,14 @@ import {
   ArrowDownward,
   DeleteOutline,
   SignalCellularNullRounded,
+  Clear,
 } from '@material-ui/icons';
 import Input from '../controls/Input';
 import EditRegister from '../EditRegister';
 import Popup from '../Popup';
 import ConfirmDialog from '../controls/ConfirmDialog';
 import MessageDialog from '../controls/MessageDialog';
+import { createStyles } from '@material-ui/styles';
 
 const headCells = [
   { id: 'cid', label: 'CID' },
@@ -35,26 +39,41 @@ const headCells = [
   { id: 'vegan', label: 'Is Vegan ?' },
   { id: 'actions', label: 'Actions', disableSorting: true },
 ];
-const useStyles = makeStyles((theme) => ({
-  searchInput: {
-    width: '50%',
-    // height: '50px',
-    marginTop: '10px',
-  },
-  toolBar: {
-    justifyContent: 'space-between',
-  },
-  btnExport: {
-    '& .MuiToolbar-root button': {
-      '& .MuiButton-label': {
-        color: 'blue',
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    root: {
+      justifyContent: 'space-between',
+
+      '& .MuiSvgIcon-root': {
+        fill: '#0074CC',
       },
-      '& .MuiButton-startIcon': {
-        color: 'blue',
+
+      '& .MuiButton-label': {
+        color: '#0074CC',
+      },
+
+      '.MuiIconButton-root.Mui-disabled': {
+        color: 'pink',
+        backgroundColor: 'yellow',
       },
     },
-  },
-}));
+    textField: {
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+      },
+      margin: theme.spacing(1, 0.5, 1.5),
+      '& .MuiSvgIcon-root': {
+        marginRight: theme.spacing(0.5),
+        fill: 'grey',
+      },
+      '& .MuiInput-underline:before': {
+        borderBottom: `1px solid ${theme.palette.divider}`,
+      },
+    },
+  })
+);
+
 const Records = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const [confirmDialog, setConfirmDialog] = useState({
@@ -75,7 +94,14 @@ const Records = () => {
       return items;
     },
   });
-
+  const [searchColumns, setSearchColumns] = useState([
+    'fname',
+    'lname',
+    'vegan',
+    'cid',
+    'district',
+    'church',
+  ]);
   const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
 
@@ -94,7 +120,13 @@ const Records = () => {
         if (target.value === '') return items;
         else
           return items.filter((x) =>
-            x.fname.toLowerCase().includes(target.value.toLowerCase())
+            // x.fname.toLowerCase().includes(target.value.toLowerCase()) ||
+            searchColumns.some((column) =>
+              x[column]
+                .toString()
+                .toLowerCase()
+                .includes(target.value.toLowerCase())
+            )
           );
       },
     });
@@ -123,6 +155,7 @@ const Records = () => {
 
     setOpenPopup(true);
   };
+
   const getData = async () => {
     setIsLoading(true);
     await axios
@@ -149,30 +182,31 @@ const Records = () => {
       )}
       {!isLoading && (
         <>
-          <Toolbar className={classes.toolBar}>
-            <Input
-              className={classes.searchInput}
-              label='Search'
+          <Toolbar className={classes.root}>
+            {/* <Input
+              label='Search Camper'
               // InputProps={{
               //   startAdornment: (
               //     <InputAdornment position='start'>
-              //       <SearchIcon />
+              //       <Search />
               //     </InputAdornment>
               //   ),
               // }}
               onChange={handleSearch}
+            /> */}
+
+            <input
+              className='SearchInput'
+              label='Search'
+              name='search'
+              placeholder='Search Camper'
+              onChange={handleSearch}
             />
+
             <Button
-              classes={{ root: classes.btnExport }}
+              // classes={{ root: classes.btnExport }}
               vairent='outlined'
               startIcon={<ArrowDownward />}
-              onClick={() =>
-                setMessageDialog({
-                  isOpen: true,
-                  title: 'Success Message !',
-                  subTitle: ' has been deleted successfully',
-                })
-              }
             >
               Export
             </Button>
@@ -206,13 +240,14 @@ const Records = () => {
                           setConfirmDialog({
                             isOpen: true,
                             title: 'Are you sure to delete this record?',
-                            subTitle: "You can't undo this operation.",
+                            subTitle:
+                              "You can't undo this operation ones completed.",
                             onConfirm: () => {
                               handleDelete(item._id);
                             },
                           })
                         }
-                      />{' '}
+                      />
                     </button>
                   </TableCell>
                 </TableRow>
