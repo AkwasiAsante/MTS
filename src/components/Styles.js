@@ -202,11 +202,6 @@ const StyledFormWrapper = styled.div`
   text-align: center;
   padding: 20px 55px;
   border-radius: 8px;
-
-  /* div {
-    display: flex;
-    flex-direction: row;
-  } */
 `;
 
 //Form Button

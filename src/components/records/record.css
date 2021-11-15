@@ -66,3 +66,15 @@ input:focus {
   font-size: 25px;
   color: grey !important;
 }
+
+.exportButton Button {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  text-transform: none;
+}
+.exportButton Button:hover {
+  border: none;
+  padding-left: 15px;
+  padding-right: 15px;
+}

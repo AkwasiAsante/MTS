@@ -11,15 +11,12 @@ const TextInputStyled = styled.input`
   color: ${colors.dark1};
   outline: 0;
 
-  //text-align: center;
   justify-content: center;
   border: 1px solid;
   border-radius: 5px;
   margin: 5px auto 10px auto;
   transition: 0.3s ease-in-out;
   letter-spacing: 1px;
-  //margin-left: 10px;
-  // border: 0;
 
   ${(props) =>
     props.invalid &&
@@ -43,11 +40,6 @@ const StyledInputIcons = styled.p`
 `;
 
 const StyledWrapperShadow = styled.div`
-  /* border-radius: 8px;
-  padding: 20px;
-  margin-right: 20px;
-
-  background-color: white; */
   background-color: ${(props) => props.bg || colors.light1};
   text-align: center;
   padding: 20px;
@@ -74,15 +66,11 @@ const SelectInputStyled = styled.select`
   color: ${colors.dark1};
   outline: 0;
 
-  //text-align: center;
-  //justify-content: center;
   border: 1px solid;
   border-radius: 5px;
   margin: 5px auto 10px auto;
   transition: 0.3s ease-in-out;
   letter-spacing: 1px;
-  //margin-left: 0px;
-  // border: 0;
 
   ${(props) =>
     props.invalid &&

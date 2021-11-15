@@ -7,9 +7,6 @@ import {
   Backdrop,
   Button,
   CircularProgress,
-  createTheme,
-  IconButton,
-  InputAdornment,
   makeStyles,
   TableBody,
   TableCell,
@@ -17,11 +14,9 @@ import {
   Toolbar,
 } from '@material-ui/core';
 import {
-  Search,
   ArrowDownward,
   DeleteOutline,
   SignalCellularNullRounded,
-  Clear,
 } from '@material-ui/icons';
 
 import EditRegister from '../EditRegister';
@@ -29,9 +24,11 @@ import Popup from '../Popup';
 import ConfirmDialog from '../controls/ConfirmDialog';
 import MessageDialog from '../controls/MessageDialog';
 import { createStyles } from '@material-ui/styles';
-
 import SearchIcon from '@material-ui/icons/Search';
-import CloseIcon from '@material-ui/icons/Close';
+import ReactExport from 'react-data-export';
+
+const ExcelFile = ReactExport.ExcelFile;
+const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 
 const headCells = [
   { id: 'cid', label: 'CID' },
@@ -91,6 +88,7 @@ const Records = () => {
   });
 
   const [data, setData] = useState([]);
+  const [exportData, setExportData] = useState([]);
   const [dataForEdit, setDataForEdit] = useState(SignalCellularNullRounded);
   const [filterFn, setFilterFn] = useState({
     fn: (items) => {
@@ -107,7 +105,6 @@ const Records = () => {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
-  // const serachValue = document.getElementById('searchInputBox');
 
   const {
     TblContainer,
@@ -166,7 +163,7 @@ const Records = () => {
       .get(apiCamp + `/list`)
       .then((response) => {
         setData(response.data);
-
+        setExportData(response.data);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -177,6 +174,77 @@ const Records = () => {
     getData();
   }, []);
 
+  //EXPORT DATA TO EXCEL
+  const DataSet = [
+    {
+      columns: [
+        {
+          title: 'ID NUMBER',
+          style: { font: { sz: '12', bold: true } },
+          width: { wpx: 120 },
+        }, // width in pixels
+        {
+          title: 'FIRST NAME',
+          style: { font: { sz: '12', bold: true } },
+          width: { wch: 150 },
+        }, // width in characters
+        {
+          title: 'OTHER NAME(S)',
+          style: { font: { sz: '12', bold: true } },
+          width: { wpx: 150 },
+        }, // width in pixels
+        {
+          title: 'GENDER',
+          style: { font: { sz: '12', bold: true } },
+          width: { wpx: 120 },
+        }, // width in pixels
+        {
+          title: 'CONTACT #',
+          style: { font: { sz: '12', bold: true } },
+          width: { wpx: 150 },
+        }, // width in pixels
+        {
+          title: 'CHURCH',
+          style: { font: { sz: '12', bold: true } },
+          width: { wpx: 150 },
+        }, // width in pixels
+        {
+          title: 'DISTRICT',
+          style: { font: { sz: '12', bold: true } },
+          width: { wch: 150 },
+        }, // width in characters
+        {
+          title: 'CLASS',
+          style: { font: { sz: '12', bold: true } },
+          width: { wpx: 150 },
+        }, // width in pixels
+        {
+          title: 'AGE RANGE',
+          style: { font: { sz: '12', bold: true } },
+          width: { wpx: 150 },
+        }, // width in pixels
+        {
+          title: 'IS VEGAN ?',
+          style: { font: { sz: '12', bold: true } },
+          width: { wpx: 130 },
+        }, // width in pixels
+      ],
+      data: exportData.map((data) => [
+        { value: data.cid, style: { font: { sz: '12' } } },
+        { value: data.fname, style: { font: { sz: '12' } } },
+        { value: data.lname, style: { font: { sz: '12' } } },
+        { value: data.gender, style: { font: { sz: '12' } } },
+        { value: data.contact, style: { font: { sz: '12' } } },
+        { value: data.church, style: { font: { sz: '12' } } },
+        { value: data.district, style: { font: { sz: '12' } } },
+        { value: data.ayclass, style: { font: { sz: '12' } } },
+        { value: data.agerange, style: { font: { sz: '12' } } },
+        { value: data.vegan ? 'Yes' : 'No', style: { font: { sz: '12' } } },
+      ]),
+    },
+  ];
+
+  //EXPORT DATA ENDS
   return (
     <div>
       {isLoading && (
@@ -195,20 +263,24 @@ const Records = () => {
                 onChange={handleSearch}
               />
               <div className='searchIcon'>
-                {/* {serachValue.value.length === 0 ? ( */}
                 <SearchIcon />
-                {/* ) : (
-                  <CloseIcon id='clearBtn' onClick={(serachValue.value = '')} />
-                )} */}
               </div>
             </div>
-            {/* <SearchInput
-              handleOnChange={handleSearch}
-              placeholder='Search Information'
-            /> */}
-            <Button vairent='outlined' startIcon={<ArrowDownward />}>
-              Export
-            </Button>
+            <div className='exportButton'>
+              <ExcelFile
+                filename='YC2021 Data'
+                element={
+                  <Button vairent='outlined' startIcon={<ArrowDownward />}>
+                    Export Data
+                  </Button>
+                }
+              >
+                <ExcelSheet
+                  dataSet={DataSet}
+                  name='YC2021 Registration Report'
+                />
+              </ExcelFile>
+            </div>
           </Toolbar>
           <TblContainer>
             <TblHead />
