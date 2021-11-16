@@ -20,19 +20,6 @@
   cursor: pointer;
   font-size: 15px !important;
 }
-/* 
-.SearchInput {
-  font-size: 16px;
-  border-radius: 5px;
-  height: 50px;
-  width: 50%;
-  padding: 10px;
-  border: 1px solid rgb(158, 157, 157);
-}
-.SearchInput[type='text']:focus,
-.SearchInput:hover {
-  border: 2px solid blue;
-} */
 
 .searchInputs {
   display: flex;
@@ -41,6 +28,8 @@
   justify-content: center;
   border-radius: 5px;
   width: 50%;
+
+  box-shadow: 3px 3px 15px -10px rgba(0, 0, 0, 0.75);
 }
 .searchInputs input {
   background-color: white;
@@ -64,17 +53,24 @@ input:focus {
 }
 .searchIcon svg {
   font-size: 25px;
-  color: grey !important;
+  fill: grey !important;
 }
-
-.exportButton Button {
-  padding: 8px;
+.right-con {
+  display: flex;
+}
+.right-con Button {
+  padding: 10px;
   border-radius: 5px;
-  border: 1px solid grey;
   text-transform: none;
+  margin-right: 10px;
+}
+.right-con a {
+  text-decoration: none;
+}
+.exportButton {
+  border-radius: 5px;
+  border: 1px solid rgb(206, 203, 203);
 }
 .exportButton Button:hover {
-  border: none;
-  padding-left: 15px;
-  padding-right: 15px;
+  width: 100%;
 }

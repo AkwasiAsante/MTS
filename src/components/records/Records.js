@@ -25,6 +25,7 @@ import ConfirmDialog from '../controls/ConfirmDialog';
 import MessageDialog from '../controls/MessageDialog';
 import { createStyles } from '@material-ui/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import SettingsIcon from '@material-ui/icons/Settings';
 import ReactExport from 'react-data-export';
 
 const ExcelFile = ReactExport.ExcelFile;
@@ -243,8 +244,8 @@ const Records = () => {
       ]),
     },
   ];
-
   //EXPORT DATA ENDS
+
   return (
     <div>
       {isLoading && (
@@ -266,20 +267,29 @@ const Records = () => {
                 <SearchIcon />
               </div>
             </div>
-            <div className='exportButton'>
-              <ExcelFile
-                filename='YC2021 Data'
-                element={
-                  <Button vairent='outlined' startIcon={<ArrowDownward />}>
-                    Export Data
+            <div className='right-con'>
+              <div className='generate-tag'>
+                <a href='/tags'>
+                  <Button variant='outlined' startIcon={<SettingsIcon />}>
+                    Camp Tags
                   </Button>
-                }
-              >
-                <ExcelSheet
-                  dataSet={DataSet}
-                  name='YC2021 Registration Report'
-                />
-              </ExcelFile>
+                </a>
+              </div>
+              <div className='exportButton'>
+                <ExcelFile
+                  filename='YC2021 Data'
+                  element={
+                    <Button vairent='outlined' startIcon={<ArrowDownward />}>
+                      Export Data
+                    </Button>
+                  }
+                >
+                  <ExcelSheet
+                    dataSet={DataSet}
+                    name='YC2021 Registration Report'
+                  />
+                </ExcelFile>
+              </div>
             </div>
           </Toolbar>
           <TblContainer>

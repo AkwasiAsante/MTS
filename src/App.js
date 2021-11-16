@@ -20,6 +20,7 @@ import {
   createTheme,
   ThemeProvider,
 } from '@material-ui/core';
+import Tags from './components/tag/Tags';
 
 const theme = createTheme({
   palette: {
@@ -85,6 +86,9 @@ function App({ checked }) {
             </AuthRoute>
             <AuthRoute path='/camplist'>
               <CampList />
+            </AuthRoute>
+            <AuthRoute path='/tags'>
+              <Tags />
             </AuthRoute>
 
             <BasicRoute path='/'>
