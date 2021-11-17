@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import './genderstat.css';
 
-const GenderStat = ({ data }) => {
+const GenderStat = ({ statData }) => {
   const [seniorMale, setSeniorMale] = useState(0);
   const [seniorFemale, setSeniorFemale] = useState(0);
   const [pathMale, setPathMale] = useState(0);
@@ -17,29 +17,39 @@ const GenderStat = ({ data }) => {
   const [adFemale, setAdFemale] = useState(0);
 
   useEffect(() => {
+    console.log(statData);
     const getGenData = () => {
-      for (var i in data) {
-        if (data[i].club === 'Senior Youth' && data[i].gender === 'Male') {
-          setSeniorMale(data[i].total);
-        } else if (
-          data[i].club === 'Senior Youth' &&
-          data[i].gender === 'Female'
+      for (var i in statData) {
+        if (
+          statData[i].club === 'Senior Youth' &&
+          statData[i].gender === 'Male'
         ) {
-          setSeniorFemale(data[i].total);
-        } else if (data[i].club === 'Pathfinder' && data[i].gender === 'Male') {
-          setPathMale(data[i].total);
+          setSeniorMale(statData[i].total);
         } else if (
-          data[i].club === 'Pathfinder' &&
-          data[i].gender === 'Female'
+          statData[i].club === 'Senior Youth' &&
+          statData[i].gender === 'Female'
         ) {
-          setPathFemale(data[i].total);
-        } else if (data[i].club === 'Adventurer' && data[i].gender === 'Male') {
-          setAdMale(data[i].total);
+          setSeniorFemale(statData[i].total);
         } else if (
-          data[i].club === 'Adventurer' &&
-          data[i].gender === 'Female'
+          statData[i].club === 'Pathfinder' &&
+          statData[i].gender === 'Male'
         ) {
-          setAdFemale(data[i].total);
+          setPathMale(statData[i].total);
+        } else if (
+          statData[i].club === 'Pathfinder' &&
+          statData[i].gender === 'Female'
+        ) {
+          setPathFemale(statData[i].total);
+        } else if (
+          statData[i].club === 'Adventurer' &&
+          statData[i].gender === 'Male'
+        ) {
+          setAdMale(statData[i].total);
+        } else if (
+          statData[i].club === 'Adventurer' &&
+          statData[i].gender === 'Female'
+        ) {
+          setAdFemale(statData[i].total);
         }
       }
     };

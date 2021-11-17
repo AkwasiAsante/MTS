@@ -228,7 +228,7 @@ const AdminDashboard = () => {
             />
           </div>
           <div className='gender-stat'>
-            <GenderStat data={genderStats} />
+            <GenderStat statData={genderStats} />
           </div>
         </>
       )}
