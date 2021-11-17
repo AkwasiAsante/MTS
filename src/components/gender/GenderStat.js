@@ -16,29 +16,35 @@ const GenderStat = ({ data }) => {
   const [adMale, setAdMale] = useState(0);
   const [adFemale, setAdFemale] = useState(0);
 
-  const getData = () => {
-    for (var i in data) {
-      if (data[i].club === 'Senior Youth' && data[i].gender === 'Male') {
-        setSeniorMale(data[i].total);
-      } else if (
-        data[i].club === 'Senior Youth' &&
-        data[i].gender === 'Female'
-      ) {
-        setSeniorFemale(data[i].total);
-      } else if (data[i].club === 'Pathfinder' && data[i].gender === 'Male') {
-        setPathMale(data[i].total);
-      } else if (data[i].club === 'Pathfinder' && data[i].gender === 'Female') {
-        setPathFemale(data[i].total);
-      } else if (data[i].club === 'Adventurer' && data[i].gender === 'Male') {
-        setAdMale(data[i].total);
-      } else if (data[i].club === 'Adventurer' && data[i].gender === 'Female') {
-        setAdFemale(data[i].total);
-      }
-    }
-  };
-
   useEffect(() => {
-    getData();
+    const getGenData = () => {
+      for (var i in data) {
+        if (data[i].club === 'Senior Youth' && data[i].gender === 'Male') {
+          setSeniorMale(data[i].total);
+        } else if (
+          data[i].club === 'Senior Youth' &&
+          data[i].gender === 'Female'
+        ) {
+          setSeniorFemale(data[i].total);
+        } else if (data[i].club === 'Pathfinder' && data[i].gender === 'Male') {
+          setPathMale(data[i].total);
+        } else if (
+          data[i].club === 'Pathfinder' &&
+          data[i].gender === 'Female'
+        ) {
+          setPathFemale(data[i].total);
+        } else if (data[i].club === 'Adventurer' && data[i].gender === 'Male') {
+          setAdMale(data[i].total);
+        } else if (
+          data[i].club === 'Adventurer' &&
+          data[i].gender === 'Female'
+        ) {
+          setAdFemale(data[i].total);
+        }
+      }
+    };
+
+    getGenData();
   }, []);
   return (
     <div className='genTable'>

@@ -25,158 +25,160 @@ const AdminDashboard = () => {
   const [femaleStats, setFemaleStats] = useState();
   const [genderStats, setGendereStats] = useState([]);
 
+  const getAgeStats = async () => {
+    setIsLoading(true);
+    axios
+      .get(apiCamp + `/age-stats`)
+      .then((response) => {
+        setUserData(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getData = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/totalstat')
+      .then((response) => {
+        setStats(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getSenior = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/senior')
+      .then((response) => {
+        setSeniorStats(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getAdventurer = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/adventurer')
+      .then((response) => {
+        setAdventurerStats(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getPathfinder = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/pathfinder')
+      .then((response) => {
+        setPathfinderStats(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getLastJoined = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + `/list?new=true`)
+      .then((response) => {
+        setLastJoined(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getBuduburam = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/buduburam')
+      .then((response) => {
+        setBuduStats(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getKasoa = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/kasoa')
+      .then((response) => {
+        setKasoaStats(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getOthers = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/others')
+      .then((response) => {
+        setOthersStats(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getMale = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/male')
+      .then((response) => {
+        setMaleStats(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getFemale = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/female')
+      .then((response) => {
+        setFemaleStats(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getGender = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/stats-gender-based')
+      .then((response) => {
+        setGendereStats(response.data);
+        const res = response.data;
+        setGendereStats(res);
+        setIsLoading(false);
+        // console.log(genderStats);
+        // console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
-    const getAgeStats = async () => {
-      setIsLoading(true);
-      axios
-        .get(apiCamp + `/age-stats`)
-        .then((response) => {
-          setUserData(response.data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    const getData = async () => {
-      setIsLoading(true);
-      await axios
-        .get(apiCamp + '/totalstat')
-        .then((response) => {
-          setStats(response.data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    const getSenior = async () => {
-      setIsLoading(true);
-      await axios
-        .get(apiCamp + '/senior')
-        .then((response) => {
-          setSeniorStats(response.data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const getAdventurer = async () => {
-      setIsLoading(true);
-      await axios
-        .get(apiCamp + '/adventurer')
-        .then((response) => {
-          setAdventurerStats(response.data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const getPathfinder = async () => {
-      setIsLoading(true);
-      await axios
-        .get(apiCamp + '/pathfinder')
-        .then((response) => {
-          setPathfinderStats(response.data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const getLastJoined = async () => {
-      setIsLoading(true);
-      await axios
-        .get(apiCamp + `/list?new=true`)
-        .then((response) => {
-          setLastJoined(response.data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const getBuduburam = async () => {
-      setIsLoading(true);
-      await axios
-        .get(apiCamp + '/buduburam')
-        .then((response) => {
-          setBuduStats(response.data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    const getKasoa = async () => {
-      setIsLoading(true);
-      await axios
-        .get(apiCamp + '/kasoa')
-        .then((response) => {
-          setKasoaStats(response.data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const getOthers = async () => {
-      setIsLoading(true);
-      await axios
-        .get(apiCamp + '/others')
-        .then((response) => {
-          setOthersStats(response.data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const getMale = async () => {
-      setIsLoading(true);
-      await axios
-        .get(apiCamp + '/male')
-        .then((response) => {
-          setMaleStats(response.data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const getFemale = async () => {
-      setIsLoading(true);
-      await axios
-        .get(apiCamp + '/female')
-        .then((response) => {
-          setFemaleStats(response.data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    const getGender = async () => {
-      setIsLoading(true);
-
-      await axios
-        .get(apiCamp + '/stats-gender-based')
-        .then((response) => {
-          setGendereStats(response.data);
-          const res = response.data;
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
     getData();
     getSenior();
     getPathfinder();
