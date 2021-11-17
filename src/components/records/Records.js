@@ -187,7 +187,7 @@ const Records = () => {
         {
           title: 'FIRST NAME',
           style: { font: { sz: '12', bold: true } },
-          width: { wch: 150 },
+          width: { wch: 120 },
         }, // width in characters
         {
           title: 'OTHER NAME(S)',
@@ -212,7 +212,7 @@ const Records = () => {
         {
           title: 'DISTRICT',
           style: { font: { sz: '12', bold: true } },
-          width: { wch: 150 },
+          width: { wch: 120 },
         }, // width in characters
         {
           title: 'CLASS',
