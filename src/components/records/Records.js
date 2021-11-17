@@ -232,7 +232,7 @@ const Records = () => {
       ],
       data: exportData.map((data) => [
         { value: data.cid, style: { font: { sz: '12' } } },
-        { value: data.fname.toUpperCase(), style: { font: { sz: '12' } } },
+        { value: data.fname, style: { font: { sz: '12' } } },
         { value: data.lname, style: { font: { sz: '12' } } },
         { value: data.gender, style: { font: { sz: '12' } } },
         { value: data.contact, style: { font: { sz: '12' } } },

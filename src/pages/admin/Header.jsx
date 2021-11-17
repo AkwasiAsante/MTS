@@ -23,7 +23,7 @@ const Header = ({ logoutUser, user }) => {
               <>
                 <a href='/admindashboard'>Dashboard</a>
                 <a href='/campregister-2021'>Register</a>
-                <a href='/camplist'>Campers List</a>
+                <a href='/camplist'>Records</a>
               </>
             )}
             <button className='btn-logout' onClick={() => logoutUser(history)}>

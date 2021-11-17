@@ -35,10 +35,13 @@
   color: #666;
   margin: 0 1rem;
   text-decoration: none;
+  margin-right: 20px;
 }
+
 .navbar a:hover {
   color: #006eb6;
 }
+
 .btn-logout {
   background-color: #006eb6;
   padding: 8px 25px;
@@ -68,4 +71,11 @@
 .last-joined {
   display: flex;
   padding-bottom: 1rem;
+}
+
+.gender-stat {
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+  margin-left: 20px;
+  margin-right: 20px;
 }

@@ -8,6 +8,7 @@ import axios from 'axios';
 import Chart from '../../components/chart/Chart';
 import { apiCamp } from '../../auth/store';
 import { Backdrop, CircularProgress } from '@material-ui/core';
+import GenderStat from '../../components/gender/GenderStat';
 
 const AdminDashboard = () => {
   const [userData, setUserData] = useState([]);
@@ -22,6 +23,7 @@ const AdminDashboard = () => {
   const [othersStats, setOthersStats] = useState();
   const [maleStats, setMaleStats] = useState();
   const [femaleStats, setFemaleStats] = useState();
+  const [genderStats, setGendereStats] = useState([]);
 
   useEffect(() => {
     const getAgeStats = async () => {
@@ -160,6 +162,21 @@ const AdminDashboard = () => {
         });
     };
 
+    const getGender = async () => {
+      setIsLoading(true);
+
+      await axios
+        .get(apiCamp + '/stats-gender-based')
+        .then((response) => {
+          setGendereStats(response.data);
+          const res = response.data;
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
     getData();
     getSenior();
     getPathfinder();
@@ -171,13 +188,14 @@ const AdminDashboard = () => {
     getOthers();
     getMale();
     getFemale();
+    getGender();
   }, []);
 
   return (
     <div>
       {/* <!-- header section starts  --> */}
       <Header />
-    
+
       {isLoading && (
         <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -206,6 +224,9 @@ const AdminDashboard = () => {
               maleStats={maleStats}
               femaleStats={femaleStats}
             />
+          </div>
+          <div className='gender-stat'>
+            <GenderStat data={genderStats} />
           </div>
         </>
       )}
