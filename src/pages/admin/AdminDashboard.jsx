@@ -23,7 +23,14 @@ const AdminDashboard = () => {
   const [othersStats, setOthersStats] = useState();
   const [maleStats, setMaleStats] = useState();
   const [femaleStats, setFemaleStats] = useState();
-  const [genderStats, setGendereStats] = useState([]);
+  // const [genderStats, setGendereStats] = useState([]);
+
+  const [seniorMale, setSeniorMale] = useState([]);
+  const [seniorFemale, setSeniorFemale] = useState([]);
+  const [pathMale, setPathMale] = useState(0);
+  const [pathFemale, setPathFemale] = useState(0);
+  const [adMale, setAdMale] = useState(0);
+  const [adFemale, setAdFemale] = useState(0);
 
   const getAgeStats = async () => {
     setIsLoading(true);
@@ -161,17 +168,75 @@ const AdminDashboard = () => {
       });
   };
 
-  const getGender = async () => {
+  const getGenderSM = async () => {
     setIsLoading(true);
     await axios
-      .get(apiCamp + '/stats-gender-based')
+      .get(apiCamp + '/stats-gender-SM')
       .then((response) => {
-        setGendereStats(response.data);
-        const res = response.data;
-        setGendereStats(res);
+        setSeniorMale(response.data);
+
         setIsLoading(false);
-        // console.log(genderStats);
-        // console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getGenderSF = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/stats-gender-SF')
+      .then((response) => {
+        setSeniorFemale(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getGenderPM = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/stats-gender-pM')
+      .then((response) => {
+        setPathMale(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getGenderPF = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/stats-gender-pF')
+      .then((response) => {
+        setPathFemale(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getGenderAM = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/stats-gender-aM')
+      .then((response) => {
+        setAdMale(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getGenderAF = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/stats-gender-aF')
+      .then((response) => {
+        setAdFemale(response.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -190,7 +255,12 @@ const AdminDashboard = () => {
     getOthers();
     getMale();
     getFemale();
-    getGender();
+    getGenderSM();
+    getGenderSF();
+    getGenderPM();
+    getGenderPF();
+    getGenderAM();
+    getGenderAF();
   }, []);
 
   return (
@@ -228,7 +298,14 @@ const AdminDashboard = () => {
             />
           </div>
           <div className='gender-stat'>
-            <GenderStat statData={genderStats} />
+            <GenderStat
+              sM={seniorMale}
+              sF={seniorFemale}
+              pM={pathMale}
+              pF={pathFemale}
+              aM={adMale}
+              aF={adFemale}
+            />
           </div>
         </>
       )}

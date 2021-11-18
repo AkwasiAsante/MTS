@@ -94,9 +94,11 @@ export default function useTable(records, headCells, filterFn) {
       </TableHead>
     );
   };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);

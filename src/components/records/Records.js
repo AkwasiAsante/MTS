@@ -16,7 +16,7 @@ import {
 import {
   ArrowDownward,
   DeleteOutline,
-  SignalCellularNullRounded,
+  // SignalCellularNullRounded,
 } from '@material-ui/icons';
 
 import EditRegister from '../EditRegister';
@@ -90,7 +90,7 @@ const Records = () => {
 
   const [data, setData] = useState([]);
   const [exportData, setExportData] = useState([]);
-  const [dataForEdit, setDataForEdit] = useState(SignalCellularNullRounded);
+  const [dataForEdit, setDataForEdit] = useState();
   const [filterFn, setFilterFn] = useState({
     fn: (items) => {
       return items;
@@ -187,8 +187,8 @@ const Records = () => {
         {
           title: 'FIRST NAME',
           style: { font: { sz: '12', bold: true } },
-          width: { wch: 150 },
-        }, // width in characters
+          width: { wpx: 150 },
+        },
         {
           title: 'OTHER NAME(S)',
           style: { font: { sz: '12', bold: true } },
@@ -212,17 +212,17 @@ const Records = () => {
         {
           title: 'DISTRICT',
           style: { font: { sz: '12', bold: true } },
-          width: { wch: 150 },
-        }, // width in characters
+          width: { wpx: 150 },
+        },
         {
           title: 'CLASS',
           style: { font: { sz: '12', bold: true } },
-          width: { wpx: 150 },
+          width: { wpx: 130 },
         }, // width in pixels
         {
           title: 'AGE RANGE',
           style: { font: { sz: '12', bold: true } },
-          width: { wpx: 150 },
+          width: { wpx: 130 },
         }, // width in pixels
         {
           title: 'IS VEGAN ?',
