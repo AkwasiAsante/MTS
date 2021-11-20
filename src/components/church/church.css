@@ -1,0 +1,54 @@
+.graphTable {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  padding: 20px;
+
+  border-radius: 5px;
+}
+.gtButtons {
+  display: flex;
+  margin-left: 10px;
+}
+.gtButtons button {
+  padding: 12px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.gtButtons button:hover {
+  background-color: #006eb6;
+  font-weight: 600;
+  color: #fff;
+}
+.gtButtons button:focus {
+  background-color: #006eb6;
+  /* font-weight: 600; */
+  color: #fff;
+}
+
+.gtContent {
+  margin: 10px;
+}
+.gtContent .chartTitle {
+  margin-top: 10px;
+}
+.tableShow Table {
+  border: 1px solid rgb(211, 209, 209);
+}
+
+.chartCh {
+  overflow-y: hidden;
+
+  font-size: 14px;
+}
+/* .chartCh .recharts-surface {
+  width: 100%;
+} */

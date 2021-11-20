@@ -9,6 +9,7 @@ import Chart from '../../components/chart/Chart';
 import { apiCamp } from '../../auth/store';
 import { Backdrop, CircularProgress } from '@material-ui/core';
 import GenderStat from '../../components/gender/GenderStat';
+import Church from '../../components/church/Church';
 
 const AdminDashboard = () => {
   const [userData, setUserData] = useState([]);
@@ -23,7 +24,7 @@ const AdminDashboard = () => {
   const [othersStats, setOthersStats] = useState();
   const [maleStats, setMaleStats] = useState();
   const [femaleStats, setFemaleStats] = useState();
-  // const [genderStats, setGendereStats] = useState([]);
+  const [churchStats, setChurchStats] = useState([]);
 
   const [seniorMale, setSeniorMale] = useState([]);
   const [seniorFemale, setSeniorFemale] = useState([]);
@@ -230,6 +231,7 @@ const AdminDashboard = () => {
         console.log(err);
       });
   };
+
   const getGenderAF = async () => {
     setIsLoading(true);
     await axios
@@ -237,6 +239,20 @@ const AdminDashboard = () => {
       .then((response) => {
         setAdFemale(response.data);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getChurchData = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/stats-church-based')
+      .then((response) => {
+        setChurchStats(response.data);
+        setIsLoading(false);
+        // console.log(churchStats);
+        // console.log(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -255,6 +271,7 @@ const AdminDashboard = () => {
     getOthers();
     getMale();
     getFemale();
+    getChurchData();
     getGenderSM();
     getGenderSF();
     getGenderPM();
@@ -297,6 +314,11 @@ const AdminDashboard = () => {
               femaleStats={femaleStats}
             />
           </div>
+
+          <div className='church-stat'>
+            <Church churchData={churchStats} />
+          </div>
+
           <div className='gender-stat'>
             <GenderStat
               sM={seniorMale}
