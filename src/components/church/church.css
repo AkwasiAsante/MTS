@@ -36,6 +36,7 @@
 
 .gtContent {
   margin: 10px;
+  /* width: 100%; */
 }
 .gtContent .chartTitle {
   margin-top: 10px;
@@ -46,9 +47,6 @@
 
 .chartCh {
   overflow-y: hidden;
-
+  width: 100%;
   font-size: 14px;
 }
-/* .chartCh .recharts-surface {
-  width: 100%;
-} */

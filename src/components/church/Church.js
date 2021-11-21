@@ -10,30 +10,65 @@ import {
   Bar,
   CartesianGrid,
   ComposedChart,
+  Legend,
+  Pie,
+  PieChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
+  Cell,
 } from 'recharts';
+
 import './church.css';
 
-const Church = ({ churchData }) => {
+const Church = ({ churchData, dietData }) => {
   const [showGraphTable, setShowGraphTable] = useState(0);
+  const [title, setTitle] = useState('Church Based Statistics');
+
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill='white'
+        textAnchor={x > cx ? 'start' : 'end'}
+        dominantBaseline='central'
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
 
   return (
     <div className='graphTable'>
       <div className='gtButtons'>
         <button onClick={() => setShowGraphTable(0)}>Show Graph</button>
         <button onClick={() => setShowGraphTable(1)}>Show Table</button>
-        {/* <button onClick={() => setShowGraphTable(2)}>Show Pie Chart</button> */}
+        <button onClick={() => setShowGraphTable(2)}>Diet Chart</button>
       </div>
 
       <div className='gtContent'>
-        <h3 className='chartTitle'>Church Based Statistics</h3>
+        <h3 className='chartTitle'>{title}</h3>
         {showGraphTable === 0 && (
           <div className='graphShow'>
             <ComposedChart
-              width={1200}
+              width={900}
               height={250}
               data={churchData}
               className='chartCh'
@@ -57,6 +92,7 @@ const Church = ({ churchData }) => {
                   }}
                 >
                   <TableCell>CHURCH</TableCell>
+                  <TableCell>DISTRICT</TableCell>
                   <TableCell>TOTAL</TableCell>
                 </TableRow>
               </TableHead>
@@ -69,7 +105,14 @@ const Church = ({ churchData }) => {
                         fontSize: 15,
                       }}
                     >
-                      {data.church}
+                      {data.church.toUpperCase()}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                      }}
+                    >
+                      {data.district.toUpperCase()}
                     </TableCell>
                     <TableCell
                       style={{
@@ -86,18 +129,37 @@ const Church = ({ churchData }) => {
           </div>
         )}
 
-        {/* {showGraphTable === 2 && (
+        {showGraphTable === 2 && (
           <div className='pieShow'>
-            <ComposedChart width={730} height={250} data={churchData}>
-              <XAxis dataKey='church' />
-              <YAxis />
-              <Tooltip />
+            <PieChart width={730} height={250}>
+              <Pie
+                data={dietData}
+                dataKey='total'
+                nameKey='diet'
+                cx='50%'
+                cy='50%'
+                outerRadius={50}
+                fill='#8884d8'
+              />
+              <Pie
+                data={dietData}
+                dataKey='total'
+                nameKey={'diet'}
+                cx='50%'
+                cy='50%'
+                innerRadius={60}
+                outerRadius={80}
+                fill='#82ca9d'
+                label
+              />
               <CartesianGrid stroke='#f5f5f5' />
-
-              <Bar dataKey='total' barSize={20} fill='#413ea0' />
-            </ComposedChart>
+              <Legend />
+              <Tooltip />
+            </PieChart>
           </div>
-        )} */}
+
+          // <ResponsiveContainer width='100%' height='100%'>
+        )}
       </div>
     </div>
   );

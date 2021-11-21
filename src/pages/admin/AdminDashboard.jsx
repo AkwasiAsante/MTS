@@ -25,6 +25,7 @@ const AdminDashboard = () => {
   const [maleStats, setMaleStats] = useState();
   const [femaleStats, setFemaleStats] = useState();
   const [churchStats, setChurchStats] = useState([]);
+  const [dietStats, setDietStats] = useState([]);
 
   const [seniorMale, setSeniorMale] = useState([]);
   const [seniorFemale, setSeniorFemale] = useState([]);
@@ -156,6 +157,7 @@ const AdminDashboard = () => {
         console.log(err);
       });
   };
+
   const getFemale = async () => {
     setIsLoading(true);
     await axios
@@ -258,6 +260,18 @@ const AdminDashboard = () => {
         console.log(err);
       });
   };
+  const getDietData = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/stats-diet-based')
+      .then((response) => {
+        setDietStats(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     getData();
@@ -272,6 +286,7 @@ const AdminDashboard = () => {
     getMale();
     getFemale();
     getChurchData();
+    getDietData();
     getGenderSM();
     getGenderSF();
     getGenderPM();
@@ -316,7 +331,7 @@ const AdminDashboard = () => {
           </div>
 
           <div className='church-stat'>
-            <Church churchData={churchStats} />
+            <Church churchData={churchStats} dietData={dietStats} />
           </div>
 
           <div className='gender-stat'>
