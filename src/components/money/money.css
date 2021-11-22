@@ -1,0 +1,128 @@
+.finance {
+  margin: 20px 20px;
+
+  -webkit-box-shadow: 0px 0px 11px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 11px -10px rgba(0, 0, 0, 0.75);
+  padding: 20px;
+
+  border-radius: 5px;
+
+  display: flex;
+
+  justify-content: space-around;
+}
+.church-con {
+  margin: 20px 20px;
+
+  -webkit-box-shadow: 0px 0px 11px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 11px -10px rgba(0, 0, 0, 0.75);
+  padding: 20px;
+
+  border-radius: 5px;
+
+  display: flex;
+
+  justify-content: space-around;
+  /* background-color: #858d95; */
+}
+
+.financeItem {
+  width: 25%;
+  margin: 0px 20px;
+  margin-bottom: 10px;
+  padding: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.church-con .financeItem {
+  width: 28%;
+  margin: 0px 20px;
+  margin-bottom: 10px;
+  padding: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.financeTitle {
+  font-weight: 600;
+}
+.financeMoneyContainer {
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.financeMoneyContainer .total {
+  color: rgb(47, 47, 136);
+}
+.financeMoneyContainer .received {
+  color: rgb(48, 134, 31);
+}
+.financeMoneyContainer .balance {
+  color: rgb(128, 31, 31);
+}
+.financeMoney {
+  font-size: 30px;
+  font-weight: 600;
+}
+.financeMoneyIcon {
+  font-size: 50px !important;
+  color: #67788a;
+}
+
+.financeSub {
+  font-size: 15px;
+  color: gray;
+}
+
+.financeMoneyRate {
+  display: flex;
+  justify-content: space-between;
+}
+.financeMoney-Icon {
+  font-size: 25px !important;
+  color: #67788a;
+}
+.financeMoney-dis {
+  font-size: 20px;
+  font-weight: 600;
+}
+.con-bar {
+  font-size: 30px;
+  font-weight: 600;
+  color: #c5c7ca;
+}
+
+.group-con .group-p {
+  color: rgb(67, 233, 34);
+  margin-bottom: 5px;
+  letter-spacing: 3px;
+}
+.group-con .group-t {
+  color: rgb(30, 28, 173);
+  margin-bottom: 5px;
+  letter-spacing: 3px;
+}
+
+.balLeft {
+  color: rgb(197, 40, 72);
+  margin: 10px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+.balLeft span {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.financeItem .finance-Sub {
+  font-size: 14px;
+  color: gray;
+  letter-spacing: 1.5px;
+  margin-top: 5px;
+}

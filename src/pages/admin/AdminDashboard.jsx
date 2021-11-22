@@ -10,6 +10,7 @@ import { apiCamp } from '../../auth/store';
 import { Backdrop, CircularProgress } from '@material-ui/core';
 import GenderStat from '../../components/gender/GenderStat';
 import Church from '../../components/church/Church';
+import FinanceStats from '../../components/money/FinanceStats';
 
 const AdminDashboard = () => {
   const [userData, setUserData] = useState([]);
@@ -33,10 +34,13 @@ const AdminDashboard = () => {
   const [pathFemale, setPathFemale] = useState(0);
   const [adMale, setAdMale] = useState(0);
   const [adFemale, setAdFemale] = useState(0);
+  const [showDF, setShowDF] = useState(0);
+  const [received, setReceived] = useState(0);
+  const [payChurch, setPayChurch] = useState([]);
 
   const getAgeStats = async () => {
     setIsLoading(true);
-    axios
+    await axios
       .get(apiCamp + `/age-stats`)
       .then((response) => {
         setUserData(response.data);
@@ -72,6 +76,7 @@ const AdminDashboard = () => {
         console.log(err);
       });
   };
+
   const getAdventurer = async () => {
     setIsLoading(true);
     await axios
@@ -84,6 +89,7 @@ const AdminDashboard = () => {
         console.log(err);
       });
   };
+
   const getPathfinder = async () => {
     setIsLoading(true);
     await axios
@@ -96,6 +102,7 @@ const AdminDashboard = () => {
         console.log(err);
       });
   };
+
   const getLastJoined = async () => {
     setIsLoading(true);
     await axios
@@ -108,6 +115,7 @@ const AdminDashboard = () => {
         console.log(err);
       });
   };
+
   const getBuduburam = async () => {
     setIsLoading(true);
     await axios
@@ -133,6 +141,7 @@ const AdminDashboard = () => {
         console.log(err);
       });
   };
+
   const getOthers = async () => {
     setIsLoading(true);
     await axios
@@ -145,6 +154,7 @@ const AdminDashboard = () => {
         console.log(err);
       });
   };
+
   const getMale = async () => {
     setIsLoading(true);
     await axios
@@ -197,6 +207,7 @@ const AdminDashboard = () => {
         console.log(err);
       });
   };
+
   const getGenderPM = async () => {
     setIsLoading(true);
     await axios
@@ -253,8 +264,6 @@ const AdminDashboard = () => {
       .then((response) => {
         setChurchStats(response.data);
         setIsLoading(false);
-        // console.log(churchStats);
-        // console.log(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -266,6 +275,31 @@ const AdminDashboard = () => {
       .get(apiCamp + '/stats-diet-based')
       .then((response) => {
         setDietStats(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getMoneyReceived = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/stats-pay-received')
+      .then((response) => {
+        setReceived(response.data[0].total);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getMoneyReceivedDistrict = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/stats-pay-received-district')
+      .then((response) => {
+        setPayChurch(response.data);
+        // console.log(payChurch);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -293,6 +327,8 @@ const AdminDashboard = () => {
     getGenderPF();
     getGenderAM();
     getGenderAF();
+    getMoneyReceived();
+    getMoneyReceivedDistrict();
   }, []);
 
   return (
@@ -310,14 +346,32 @@ const AdminDashboard = () => {
       )}
       {!isLoading && (
         <>
-          <div className='card'>
-            <CardInfo
-              stats={stats}
-              seniorStats={seniorStats}
-              pathfinderStats={pathfinderStats}
-              adventurerStats={adventurerStats}
-            />
+          <div className='dashboard-con'>
+            <div className='dash-button'>
+              <button onClick={() => setShowDF(0)}>Dashboard</button>
+              <button onClick={() => setShowDF(1)}>Financial Stats</button>
+            </div>
+            {showDF === 0 && (
+              <div className='card'>
+                <CardInfo
+                  stats={stats}
+                  seniorStats={seniorStats}
+                  pathfinderStats={pathfinderStats}
+                  adventurerStats={adventurerStats}
+                />
+              </div>
+            )}
+            {showDF === 1 && (
+              <div className='finances'>
+                <FinanceStats
+                  totalPeople={stats}
+                  received={received}
+                  district={payChurch}
+                />
+              </div>
+            )}
           </div>
+
           <Chart data={userData} title='Age Analytics' grid dataKey='total' />
           <div className='last-joined'>
             <WidgetLg lastJoined={lastJoined} />

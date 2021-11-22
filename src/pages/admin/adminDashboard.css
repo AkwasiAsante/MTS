@@ -41,6 +41,9 @@
 .navbar a:hover {
   color: #006eb6;
 }
+.navbar a:focus {
+  color: #006eb6;
+}
 
 .btn-logout {
   background-color: #006eb6;
@@ -63,9 +66,42 @@
   border: 2px solid #006eb6;
 }
 
-.card {
+.dashboard-con {
   margin-top: 6rem;
   margin-bottom: 1.5rem;
+}
+
+.dashboard-con .dash-button {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.dash-button button {
+  padding: 12px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dash-button button:hover {
+  background-color: #006eb6;
+  font-weight: 600;
+  color: #fff;
+}
+.dash-button button:focus {
+  background-color: #006eb6;
+
+  color: #fff;
+}
+.finances {
+  display: block;
+  /* flex-direction: row; */
+  /* background-color: #0a1929; */
 }
 
 .last-joined {

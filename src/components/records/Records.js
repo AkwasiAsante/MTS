@@ -7,7 +7,10 @@ import {
   Backdrop,
   Button,
   CircularProgress,
+  IconButton,
   makeStyles,
+  Menu,
+  MenuItem,
   TableBody,
   TableCell,
   TableRow,
@@ -16,6 +19,7 @@ import {
 import {
   ArrowDownward,
   DeleteOutline,
+  MoreVert,
   // SignalCellularNullRounded,
 } from '@material-ui/icons';
 
@@ -27,6 +31,9 @@ import { createStyles } from '@material-ui/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ReactExport from 'react-data-export';
+import Pf from '../../assets/pathfinder.jpg';
+import Ad from '../../assets/ad.png';
+import Mg from '../../assets/mg.png';
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -37,6 +44,8 @@ const headCells = [
   { id: 'gender', label: 'Gender' },
   { id: 'ayclass', label: 'Class' },
   { id: 'district', label: 'District' },
+  { id: 'amnt', label: 'Amount' },
+  { id: 'division', label: 'Division' },
   { id: 'vegan', label: 'Is Vegan ?' },
   { id: 'actions', label: 'Actions', disableSorting: true },
 ];
@@ -103,10 +112,22 @@ const Records = () => {
     'cid',
     'district',
     'church',
+    'division',
+    'unit',
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
 
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const {
     TblContainer,
     TblHead,
@@ -225,6 +246,21 @@ const Records = () => {
           width: { wpx: 130 },
         }, // width in pixels
         {
+          title: 'AMOUNT PAID',
+          style: { font: { sz: '12', bold: true } },
+          width: { wpx: 130 },
+        }, // width in pixels
+        {
+          title: 'DIVISION',
+          style: { font: { sz: '12', bold: true } },
+          width: { wpx: 130 },
+        }, // width in pixels
+        {
+          title: 'UNIT',
+          style: { font: { sz: '12', bold: true } },
+          width: { wpx: 130 },
+        }, // width in pixels
+        {
           title: 'IS VEGAN ?',
           style: { font: { sz: '12', bold: true } },
           width: { wpx: 130 },
@@ -240,6 +276,9 @@ const Records = () => {
         { value: data.district.toUpperCase(), style: { font: { sz: '12' } } },
         { value: data.ayclass.toUpperCase(), style: { font: { sz: '12' } } },
         { value: data.agerange.toUpperCase(), style: { font: { sz: '12' } } },
+        { value: data.amnt.toFixed(2), style: { font: { sz: '12' } } },
+        { value: data.division.toUpperCase(), style: { font: { sz: '12' } } },
+        { value: data.unit.toUpperCase(), style: { font: { sz: '12' } } },
         { value: data.vegan ? 'YES' : 'NO', style: { font: { sz: '12' } } },
       ]),
     },
@@ -299,13 +338,91 @@ const Records = () => {
                 <TableRow key={item._id}>
                   <TableCell>{item.cid}</TableCell>
                   <TableCell>
-                    {item.fname.toUpperCase() + ' ' + item.lname.toUpperCase()}
+                    <span>
+                      <img
+                        src={
+                          item.ayclass === 'Pathfinder'
+                            ? Pf
+                            : item.ayclass === 'Adventurer'
+                            ? Ad
+                            : Mg
+                        }
+                        alt=''
+                        style={{
+                          width: 18,
+                          height: 18,
+                          borderRadius: '50%',
+                          marginTop: 5,
+                        }}
+                      />{' '}
+                      {item.fname.toUpperCase() +
+                        ' ' +
+                        item.lname.toUpperCase()}
+                    </span>
                   </TableCell>
                   <TableCell>{item.gender.toUpperCase()}</TableCell>
                   <TableCell>{item.ayclass.toUpperCase()}</TableCell>
                   <TableCell>{item.district.toUpperCase()}</TableCell>
-                  <TableCell>{item.vegan ? 'YES' : 'NO'}</TableCell>
                   <TableCell>
+                    <span
+                      style={
+                        item.amnt <= 0
+                          ? {
+                              color: 'crimson',
+                              border: '1px solid crimson',
+                              borderRadius: 8,
+                              padding: 5,
+                              fontSize: 12,
+                            }
+                          : item.amnt === 50
+                          ? {
+                              color: '#0000FF',
+                              border: '1px solid #0000FF',
+                              borderRadius: 8,
+                              padding: 5,
+                              fontSize: 12,
+                            }
+                          : {
+                              color: '#18A558',
+                              border: '1px solid #116530',
+                              borderRadius: 8,
+                              padding: 5,
+                              fontSize: 12,
+                            }
+                      }
+                    >
+                      GHS {item.amnt.toFixed(2)}
+                    </span>
+                  </TableCell>
+                  <TableCell>
+                    <span
+                      style={
+                        item.division === ''
+                          ? {
+                              color: 'crimson',
+                              border: '1px solid crimson',
+                              borderRadius: 8,
+                              padding: 5,
+                              fontSize: 12,
+                            }
+                          : {
+                              color: '#18A558',
+                              border: '1px solid #116530',
+                              borderRadius: 8,
+                              padding: 5,
+                              fontSize: 12,
+                            }
+                      }
+                    >
+                      {item.division === ''
+                        ? 'NOT ASSIGNED'
+                        : item.division.toUpperCase()}
+                    </span>
+                  </TableCell>
+                  <TableCell>{item.vegan ? 'YES' : 'NO'}</TableCell>
+                  <TableCell
+                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
                     <button
                       className='userListEdit'
                       onClick={() => {
@@ -329,6 +446,9 @@ const Records = () => {
                           })
                         }
                       />
+                    </button>
+                    <button className='moreOpt'>
+                      <MoreVert />
                     </button>
                   </TableCell>
                 </TableRow>

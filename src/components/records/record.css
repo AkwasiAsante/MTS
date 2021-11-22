@@ -5,7 +5,7 @@
   background-color: #5166e0;
   color: white;
   cursor: pointer;
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
 .userListDelete-con {
   border: 1px solid grey;
@@ -13,6 +13,17 @@
   padding: 3px 10px;
 
   cursor: pointer;
+}
+.moreOpt {
+  cursor: pointer;
+  border: 1px solid grey;
+  width: 28px;
+  height: 28px;
+  /* border: none; */
+  border-radius: 5px;
+}
+.moreOpt svg {
+  font-size: 16px !important;
 }
 
 .userListDelete {
