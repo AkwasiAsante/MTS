@@ -10,12 +10,13 @@
   border-radius: 5px;
   border: 1px solid gray;
   text-transform: capitalize;
+  font-size: 14px;
 }
 .formInput input::after {
   text-transform: capitalize;
 }
 label {
-  font-size: 12px;
+  font-size: 13px;
   color: gray;
 }
 

@@ -1,5 +1,5 @@
-import { StyledContainer, StyledContainerSecond } from './components/Styles';
-//React Loader Spinner
+import { StyledContainer } from './components/Styles';
+
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -14,12 +14,7 @@ import { connect } from 'react-redux';
 import CampRegister from './pages/CampRegister';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import CampList from './pages/CampList';
-import {
-  makeStyles,
-  CssBaseline,
-  createTheme,
-  ThemeProvider,
-} from '@material-ui/core';
+import { createTheme, ThemeProvider } from '@material-ui/core';
 import Tags from './components/tag/Tags';
 
 const theme = createTheme({

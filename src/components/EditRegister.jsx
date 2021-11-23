@@ -17,6 +17,9 @@ const EditRegister = (props) => {
     fname: '',
     contact: '',
     church: '',
+    amnt: '',
+    division: '',
+    unit: '',
   });
   const [vegan, setVegan] = useState(false);
   const [district, setDistrict] = useState('Buduburam');
@@ -132,7 +135,9 @@ const EditRegister = (props) => {
                 minLength='10'
                 value={data.contact}
                 onChange={onChange}
+                // style={{ width: '140px' }}
               />
+
               <FormInput
                 name='church'
                 type='text'
@@ -209,25 +214,69 @@ const EditRegister = (props) => {
                 </select>
               </div>
             </div>
-            <div className='dietcont'>
-              <label className='diet'>Are you a vegetarian ?</label>
-              <input
-                type='radio'
-                value='true'
-                name='vegan'
-                onChange={(e) => setVegan(true)}
-                checked={vegan === true}
+            <div className='group-con'>
+              <FormInput
+                name='division'
+                type='text'
+                placeholder='Division'
+                errorMessage='Please check name of division!'
+                label='Division Name'
+                maxLength='32'
+                // required
+                value={data.division}
+                onChange={onChange}
               />
-              Yes
-              <input
-                className='radioB'
-                type='radio'
-                value='false'
-                name='vegan'
-                onChange={(e) => setVegan(false)}
-                checked={vegan === false}
+              <FormInput
+                name='unit'
+                type='text'
+                placeholder='Unit Name'
+                errorMessage='Please check name of unit!'
+                label='Unit Name'
+                maxLength='32'
+                // required
+                value={data.unit}
+                onChange={onChange}
               />
-              No
+            </div>
+            <div className='group-con'>
+              <FormInput
+                name='amnt'
+                type='number'
+                placeholder='Amount Paid'
+                errorMessage='Please check name of unit!'
+                label='Amount Paid'
+                maxLength='32'
+                // required
+                value={data.amnt}
+                onChange={onChange}
+                style={{
+                  width: '200px',
+                  textAlign: 'center',
+                  fontSize: '16px',
+                  fontWeight: 600,
+                }}
+              />
+
+              <div className='dietcont'>
+                <label className='diet'>Is vegetarian ?</label>
+                <input
+                  type='radio'
+                  value='true'
+                  name='vegan'
+                  onChange={(e) => setVegan(true)}
+                  checked={vegan === true}
+                />
+                Yes
+                <input
+                  className='radioB'
+                  type='radio'
+                  value='false'
+                  name='vegan'
+                  onChange={(e) => setVegan(false)}
+                  checked={vegan === false}
+                />
+                No
+              </div>
             </div>
             <div className='btn-con'>
               {!isSubmitting && <button type='submit'>Update</button>}
@@ -263,6 +312,7 @@ const Formcont = styled.div`
   .group-con {
     display: flex;
     flex-direction: row;
+
     div {
       margin-right: 5px;
       margin-left: 5px;
@@ -276,8 +326,8 @@ const Formcont = styled.div`
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    width: 266px;
-
+    width: 256px;
+    font-size: 14px;
     padding: 12px;
     margin: 10px 0px;
 

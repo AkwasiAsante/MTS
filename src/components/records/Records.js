@@ -16,11 +16,13 @@ import {
   TableRow,
   Toolbar,
 } from '@material-ui/core';
+
 import {
   ArrowDownward,
   DeleteOutline,
   MoreVert,
-  // SignalCellularNullRounded,
+  Edit,
+  MonetizationOn,
 } from '@material-ui/icons';
 
 import EditRegister from '../EditRegister';
@@ -42,7 +44,7 @@ const headCells = [
   { id: 'cid', label: 'CID' },
   { id: 'fname', label: 'Full Name' },
   { id: 'gender', label: 'Gender' },
-  { id: 'ayclass', label: 'Class' },
+  // { id: 'ayclass', label: 'Class' },
   { id: 'district', label: 'District' },
   { id: 'amnt', label: 'Amount' },
   { id: 'division', label: 'Division' },
@@ -66,19 +68,6 @@ const useStyles = makeStyles((theme) =>
       '.MuiIconButton-root.Mui-disabled': {
         color: 'pink',
         backgroundColor: 'yellow',
-      },
-    },
-    textField: {
-      [theme.breakpoints.down('xs')]: {
-        width: '100%',
-      },
-      margin: theme.spacing(1, 0.5, 1.5),
-      '& .MuiSvgIcon-root': {
-        marginRight: theme.spacing(0.5),
-        fill: 'grey',
-      },
-      '& .MuiInput-underline:before': {
-        borderBottom: `1px solid ${theme.palette.divider}`,
       },
     },
   })
@@ -114,20 +103,22 @@ const Records = () => {
     'church',
     'division',
     'unit',
+    'ayclass',
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(false);
 
-  // const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const {
     TblContainer,
     TblHead,
@@ -177,6 +168,7 @@ const Records = () => {
     setDataForEdit(item);
 
     setOpenPopup(true);
+    handleClose();
   };
 
   const getData = async () => {
@@ -353,6 +345,7 @@ const Records = () => {
                           height: 18,
                           borderRadius: '50%',
                           marginTop: 5,
+                          marginRight: 10,
                         }}
                       />{' '}
                       {item.fname.toUpperCase() +
@@ -361,7 +354,7 @@ const Records = () => {
                     </span>
                   </TableCell>
                   <TableCell>{item.gender.toUpperCase()}</TableCell>
-                  <TableCell>{item.ayclass.toUpperCase()}</TableCell>
+                  {/* <TableCell>{item.ayclass.toUpperCase()}</TableCell> */}
                   <TableCell>{item.district.toUpperCase()}</TableCell>
                   <TableCell>
                     <span
@@ -420,6 +413,67 @@ const Records = () => {
                     </span>
                   </TableCell>
                   <TableCell>{item.vegan ? 'YES' : 'NO'}</TableCell>
+                  {/* <TableCell> */}
+                  <div>
+                    {/* <Button
+                        id='more-button'
+                        aria-controls='more-menu'
+                        aria-haspopup='true'
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                      >
+                        <MoreVert />
+                      </Button>
+                      <Menu
+                        id='more-menu'
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                          'aria-labelledby': 'more-button',
+                        }}
+                        style={{
+                          left: '80%',
+                          top: '50%',
+                        }}
+                      >
+                        <MenuItem
+                          className='lst-e'
+                          onClick={() => {
+                            openInPopup(item);
+                          }}
+                        >
+                          <Edit /> Edit
+                        </MenuItem>
+                        <MenuItem className='lst' onClick={handleClose}>
+                          <MonetizationOn />
+                          Full Payment
+                        </MenuItem>
+                        <MenuItem className='lst' onClick={handleClose}>
+                          <MonetizationOn />
+                          Part Payment
+                        </MenuItem>
+                        <MenuItem
+                          className='lst-d'
+                          onClick={
+                            (() =>
+                              setConfirmDialog({
+                                isOpen: true,
+                                title: 'Are you sure to delete this record?',
+                                subTitle:
+                                  "You can't undo this operation ones completed.",
+                                onConfirm: () => {
+                                  handleDelete(item._id);
+                                },
+                              }),
+                            { handleClose })
+                          }
+                        >
+                          <DeleteOutline /> Delete
+                        </MenuItem>
+                      </Menu> */}
+                  </div>
+                  {/* </TableCell> */}
                   <TableCell
                     style={{ display: 'flex', justifyContent: 'space-between' }}
                   >
@@ -429,6 +483,7 @@ const Records = () => {
                         openInPopup(item);
                       }}
                     >
+                      <Edit className='edit-icon' />
                       Edit
                     </button>
                     <button className='userListDelete-con'>
@@ -446,9 +501,6 @@ const Records = () => {
                           })
                         }
                       />
-                    </button>
-                    <button className='moreOpt'>
-                      <MoreVert />
                     </button>
                   </TableCell>
                 </TableRow>
