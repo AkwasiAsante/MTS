@@ -16,7 +16,7 @@ const Header = ({ logoutUser, user }) => {
             <a href='/admindashboard' className='logo'>
               <img src={Logo} alt='' />
             </a>
-            <h4> Inter-District Youth Camp 2021</h4>
+            <h4> ID YOUTH CAMP 2021</h4>
           </div>
           <nav className='navbar'>
             {user.isAdmin && (

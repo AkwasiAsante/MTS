@@ -314,7 +314,7 @@ const Formcont = styled.div`
     flex-direction: row;
 
     div {
-      margin-right: 5px;
+      margin-right: 10px;
       margin-left: 5px;
     }
   }
@@ -326,11 +326,11 @@ const Formcont = styled.div`
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    width: 256px;
+    width: 200px;
     font-size: 14px;
     padding: 12px;
     margin: 10px 0px;
-
+    margin-right: 70px;
     border-radius: 5px;
     border: 1px solid gray;
 

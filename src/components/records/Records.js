@@ -7,23 +7,14 @@ import {
   Backdrop,
   Button,
   CircularProgress,
-  IconButton,
   makeStyles,
-  Menu,
-  MenuItem,
   TableBody,
   TableCell,
   TableRow,
   Toolbar,
 } from '@material-ui/core';
 
-import {
-  ArrowDownward,
-  DeleteOutline,
-  MoreVert,
-  Edit,
-  MonetizationOn,
-} from '@material-ui/icons';
+import { ArrowDownward, DeleteOutline, Edit } from '@material-ui/icons';
 
 import EditRegister from '../EditRegister';
 import Popup from '../Popup';
@@ -108,17 +99,6 @@ const Records = () => {
   const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
 
-  const [anchorEl, setAnchorEl] = useState(false);
-
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const {
     TblContainer,
     TblHead,
@@ -168,7 +148,6 @@ const Records = () => {
     setDataForEdit(item);
 
     setOpenPopup(true);
-    handleClose();
   };
 
   const getData = async () => {

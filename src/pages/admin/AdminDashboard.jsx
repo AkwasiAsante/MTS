@@ -11,6 +11,7 @@ import { Backdrop, CircularProgress } from '@material-ui/core';
 import GenderStat from '../../components/gender/GenderStat';
 import Church from '../../components/church/Church';
 import FinanceStats from '../../components/money/FinanceStats';
+import Footer from '../../components/footer/Footer';
 
 const AdminDashboard = () => {
   const [userData, setUserData] = useState([]);
@@ -348,8 +349,26 @@ const AdminDashboard = () => {
         <>
           <div className='dashboard-con'>
             <div className='dash-button'>
-              <button onClick={() => setShowDF(0)}>Dashboard</button>
-              <button onClick={() => setShowDF(1)}>Financial Stats</button>
+              <button
+                style={
+                  showDF === 0
+                    ? { backgroundColor: '#006eb6', color: '#fff' }
+                    : {}
+                }
+                onClick={() => setShowDF(0)}
+              >
+                Dashboard
+              </button>
+              <button
+                style={
+                  showDF === 1
+                    ? { backgroundColor: '#006eb6', color: '#fff' }
+                    : {}
+                }
+                onClick={() => setShowDF(1)}
+              >
+                Financial Stats
+              </button>
             </div>
             {showDF === 0 && (
               <div className='card'>
@@ -398,6 +417,7 @@ const AdminDashboard = () => {
               aF={adFemale}
             />
           </div>
+          <Footer />
         </>
       )}
     </div>
@@ -405,4 +425,3 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
-// export default connect(null, { campStats })(AdminDashboard);
