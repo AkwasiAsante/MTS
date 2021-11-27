@@ -47,9 +47,8 @@ const Container = styled.div`
   .box {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (minmax(25rem, 1fr)) [auto-fit];
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-    gap: 1rem;
+    
+    
     svg {
       color: #222;
       font-weight: bold;
