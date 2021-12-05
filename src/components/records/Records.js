@@ -97,6 +97,8 @@ const Records = () => {
     'ayclass',
   ]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
+
   const classes = useStyles();
 
   const {
@@ -135,6 +137,7 @@ const Records = () => {
     const url = `${apiCamp}/delete/${_id}`;
 
     await axios.delete(url).then((res) => {
+      setIsDelete(true);
       setMessageDialog({
         isOpen: true,
         title: 'Success Message !',
@@ -146,7 +149,7 @@ const Records = () => {
 
   const openInPopup = (item) => {
     setDataForEdit(item);
-
+    setIsDelete(false);
     setOpenPopup(true);
   };
 
@@ -392,67 +395,7 @@ const Records = () => {
                     </span>
                   </TableCell>
                   <TableCell>{item.vegan ? 'YES' : 'NO'}</TableCell>
-                  {/* <TableCell> */}
-                  <div>
-                    {/* <Button
-                        id='more-button'
-                        aria-controls='more-menu'
-                        aria-haspopup='true'
-                        aria-expanded={open ? 'true' : undefined}
-                        onClick={handleClick}
-                      >
-                        <MoreVert />
-                      </Button>
-                      <Menu
-                        id='more-menu'
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        MenuListProps={{
-                          'aria-labelledby': 'more-button',
-                        }}
-                        style={{
-                          left: '80%',
-                          top: '50%',
-                        }}
-                      >
-                        <MenuItem
-                          className='lst-e'
-                          onClick={() => {
-                            openInPopup(item);
-                          }}
-                        >
-                          <Edit /> Edit
-                        </MenuItem>
-                        <MenuItem className='lst' onClick={handleClose}>
-                          <MonetizationOn />
-                          Full Payment
-                        </MenuItem>
-                        <MenuItem className='lst' onClick={handleClose}>
-                          <MonetizationOn />
-                          Part Payment
-                        </MenuItem>
-                        <MenuItem
-                          className='lst-d'
-                          onClick={
-                            (() =>
-                              setConfirmDialog({
-                                isOpen: true,
-                                title: 'Are you sure to delete this record?',
-                                subTitle:
-                                  "You can't undo this operation ones completed.",
-                                onConfirm: () => {
-                                  handleDelete(item._id);
-                                },
-                              }),
-                            { handleClose })
-                          }
-                        >
-                          <DeleteOutline /> Delete
-                        </MenuItem>
-                      </Menu> */}
-                  </div>
-                  {/* </TableCell> */}
+
                   <TableCell
                     style={{ display: 'flex', justifyContent: 'space-between' }}
                   >
@@ -503,7 +446,8 @@ const Records = () => {
       <MessageDialog
         messageDialog={messageDialog}
         setMessageDialog={setMessageDialog}
-        formType={2}
+         formType={2}
+         isDel={isDelete}
       />
     </div>
   );

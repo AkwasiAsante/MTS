@@ -43,24 +43,19 @@ const useStyles = makeStyles((theme) => ({
 
 const MessageDialog = (props) => {
   const { messageDialog, setMessageDialog } = props;
-  const { formType } = props;
+  const { formType, isDel } = props;
   const classes = useStyles();
   const history = useHistory();
 
   const handleClose = () => {
     setMessageDialog({ ...messageDialog, isOpen: false });
-
-    // window.parent.location = window.parent.location.href;
-    // if (formType === 1) {
-    //   history.push('admindashboard');
-    //   console.log('inhere 1');
-    // } else if (formType === 2) {
-    //   history.push('www.google.com');
-    //   console.log('inhere 2');
-    // } else {
-    //   history.push('/');
-    //   console.log('inhere');
-    // }
+    console.log(isDel);
+    //  window.parent.location = window.parent.location.href;
+    if (formType === 1) {
+      window.location.href = '/';
+    } else if (formType === 2 && isDel === false) {
+      window.location.href = 'camplist';
+    }
   };
 
   return (
