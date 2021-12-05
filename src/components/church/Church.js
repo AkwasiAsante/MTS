@@ -22,7 +22,7 @@ import {
 
 import './church.css';
 
-const Church = ({ churchData, dietData }) => {
+const Church = ({ churchData, dietData, divisionData }) => {
   const [showGraphTable, setShowGraphTable] = useState(0);
   const [title, setTitle] = useState('Church Based Statistics');
 
@@ -61,6 +61,7 @@ const Church = ({ churchData, dietData }) => {
         <button onClick={() => setShowGraphTable(0)}>Show Graph</button>
         <button onClick={() => setShowGraphTable(1)}>Show Table</button>
         <button onClick={() => setShowGraphTable(2)}>Diet Chart</button>
+        <button onClick={() => setShowGraphTable(3)}>Divisions</button>
       </div>
 
       <div className='gtContent'>
@@ -113,6 +114,54 @@ const Church = ({ churchData, dietData }) => {
                       }}
                     >
                       {data.district.toUpperCase()}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                        fontWeight: 600,
+                      }}
+                    >
+                      {data.total}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        )}
+        {showGraphTable === 3 && (
+          <div className='tableShow'>
+            <Table>
+              <TableHead>
+                <TableRow
+                  style={{
+                    backgroundColor: 'rgb(251, 251, 255)',
+                  }}
+                >
+                  <TableCell>DIVISION</TableCell>
+                  <TableCell>GENDER</TableCell>
+                  <TableCell>TOTAL</TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {divisionData.map((data) => (
+                  <TableRow key={data._id + data.gender}>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                      }}
+                    >
+                      {data.division === ''
+                        ? 'NOT ASSIGNED'
+                        : data.division.toUpperCase()}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                      }}
+                    >
+                      {data.gender.toUpperCase()}
                     </TableCell>
                     <TableCell
                       style={{

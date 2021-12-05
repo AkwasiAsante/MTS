@@ -38,6 +38,7 @@ const AdminDashboard = () => {
   const [showDF, setShowDF] = useState(0);
   const [received, setReceived] = useState(0);
   const [payChurch, setPayChurch] = useState([]);
+  const [divisions, setDivisions] = useState([]);
 
   const getAgeStats = async () => {
     setIsLoading(true);
@@ -300,7 +301,23 @@ const AdminDashboard = () => {
       .get(apiCamp + '/stats-pay-received-district')
       .then((response) => {
         setPayChurch(response.data);
-        // console.log(payChurch);
+
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getDivision = async () => {
+    setIsLoading(true);
+    await axios
+      .get(apiCamp + '/stats-division')
+      .then((response) => {
+        const data = response.data.sort((a, b) =>
+          a.division.localeCompare(b.division)
+        );
+        setDivisions(data);
+
         setIsLoading(false);
       })
       .catch((err) => {
@@ -330,6 +347,7 @@ const AdminDashboard = () => {
     getGenderAF();
     getMoneyReceived();
     getMoneyReceivedDistrict();
+    getDivision();
   }, []);
 
   return (
@@ -404,7 +422,11 @@ const AdminDashboard = () => {
           </div>
 
           <div className='church-stat'>
-            <Church churchData={churchStats} dietData={dietStats} />
+            <Church
+              churchData={churchStats}
+              dietData={dietStats}
+              divisionData={divisions}
+            />
           </div>
 
           <div className='gender-stat'>
