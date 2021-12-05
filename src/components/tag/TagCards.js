@@ -35,7 +35,7 @@ const TagCards = ({ info }) => {
               <p className='nameCon'>{data.fname + ' ' + data.lname}</p>
               <p className='divisionCon'>
                 {data.division
-                  ? '[ ' + data.division + ' ]'
+                  ? '[ Division: ' + data.division + ' ]'
                   : '[ Not Assigned' + ' ]'}
               </p>
             </div>

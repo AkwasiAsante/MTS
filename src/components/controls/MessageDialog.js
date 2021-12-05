@@ -48,10 +48,9 @@ const MessageDialog = (props) => {
   const history = useHistory();
 
   const handleClose = () => {
-    // console.log(formType);
     setMessageDialog({ ...messageDialog, isOpen: false });
 
-    history.push('/');
+    // window.parent.location = window.parent.location.href;
     // if (formType === 1) {
     //   history.push('admindashboard');
     //   console.log('inhere 1');

@@ -47,8 +47,7 @@ const Container = styled.div`
   .box {
     display: -ms-grid;
     display: grid;
-    
-    
+
     svg {
       color: #222;
       font-weight: bold;

@@ -47,3 +47,22 @@
   border-left: 3px solid grey;
   height: 50px;
 }
+
+@media (max-width: 768px) {
+  .widgetSm {
+    flex: 1;
+    padding: 10px;
+    /* margin-right: 10px; */
+  }
+  .gender {
+    margin: 1px 5px;
+    padding: 20px 15px;
+  }
+  .gender h2 {
+    font-size: 20px;
+  }
+  .gen-icon {
+    font-size: 20px !important;
+    color: blueviolet;
+  }
+}

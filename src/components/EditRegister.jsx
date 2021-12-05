@@ -64,6 +64,7 @@ const EditRegister = (props) => {
           });
 
           setIsSubmitting(false);
+          //dataForEdit = '';
         } else {
           setMessageDialog({
             isOpen: true,
@@ -72,6 +73,8 @@ const EditRegister = (props) => {
           });
           setIsSubmitting(false);
         }
+        window.parent.location = window.parent.location.href;
+        //window.location.href = 'www.google.com';
       })
       .catch((err) => {
         console.error(err);
