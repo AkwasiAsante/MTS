@@ -119,6 +119,7 @@ const CampRegister = ({ campRegister }) => {
         subTitle: 'You have successfully registered for youth camp 2021.',
       });
     }
+    window.parent.location = window.parent.location.href;
   };
 
   //GET CID
