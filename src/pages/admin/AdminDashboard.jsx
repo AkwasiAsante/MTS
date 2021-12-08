@@ -265,7 +265,10 @@ const AdminDashboard = () => {
       .get(apiCamp + '/stats-church-based')
       .then((response) => {
         setChurchStats(response.data);
+        const data1 = churchStats.sort((a, b) => b.total - a.total);
         setIsLoading(false);
+
+        setChurchStats(data1);
       })
       .catch((err) => {
         console.log(err);

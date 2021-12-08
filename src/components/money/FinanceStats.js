@@ -9,7 +9,7 @@ import './money.css';
 
 const FinanceStats = (props) => {
   const { totalPeople, received, district } = props;
-  console.log(district);
+  // console.log(district);
   return (
     <>
       <div className='finance'>

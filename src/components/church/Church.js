@@ -26,34 +26,34 @@ const Church = ({ churchData, dietData, divisionData }) => {
   const [showGraphTable, setShowGraphTable] = useState(0);
   const [title, setTitle] = useState('Church Based Statistics');
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  // const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-    index,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  // const RADIAN = Math.PI / 180;
+  // const renderCustomizedLabel = ({
+  //   cx,
+  //   cy,
+  //   midAngle,
+  //   innerRadius,
+  //   outerRadius,
+  //   percent,
+  //   index,
+  // }) => {
+  //   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  //   const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  //   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    return (
-      <text
-        x={x}
-        y={y}
-        fill='white'
-        textAnchor={x > cx ? 'start' : 'end'}
-        dominantBaseline='central'
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
+  //   return (
+  //     <text
+  //       x={x}
+  //       y={y}
+  //       fill='white'
+  //       textAnchor={x > cx ? 'start' : 'end'}
+  //       dominantBaseline='central'
+  //     >
+  //       {`${(percent * 100).toFixed(0)}%`}
+  //     </text>
+  //   );
+  // };
 
   return (
     <div className='graphTable'>
@@ -62,6 +62,7 @@ const Church = ({ churchData, dietData, divisionData }) => {
         <button onClick={() => setShowGraphTable(1)}>Show Table</button>
         <button onClick={() => setShowGraphTable(2)}>Diet Chart</button>
         <button onClick={() => setShowGraphTable(3)}>Divisions</button>
+        <button onClick={() => setShowGraphTable(4)}>Payment</button>
       </div>
 
       <div className='gtContent'>
@@ -92,6 +93,7 @@ const Church = ({ churchData, dietData, divisionData }) => {
                     backgroundColor: 'rgb(251, 251, 255)',
                   }}
                 >
+                  <TableCell>RNO</TableCell>
                   <TableCell>CHURCH</TableCell>
                   <TableCell>DISTRICT</TableCell>
                   <TableCell>TOTAL</TableCell>
@@ -99,8 +101,15 @@ const Church = ({ churchData, dietData, divisionData }) => {
               </TableHead>
 
               <TableBody>
-                {churchData.map((data) => (
+                {churchData.map((data, index) => (
                   <TableRow key={data._id}>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                      }}
+                    >
+                      {index + 1}
+                    </TableCell>
                     <TableCell
                       style={{
                         fontSize: 15,
@@ -129,6 +138,100 @@ const Church = ({ churchData, dietData, divisionData }) => {
             </Table>
           </div>
         )}
+
+        {showGraphTable === 4 && (
+          <div className='tableShow'>
+            <Table>
+              <TableHead>
+                <TableRow
+                  style={{
+                    backgroundColor: 'rgb(251, 251, 255)',
+                  }}
+                >
+                  <TableCell>RNO</TableCell>
+                  <TableCell>CHURCH</TableCell>
+                  <TableCell>DISTRICT</TableCell>
+                  <TableCell>CAMPERS</TableCell>
+                  <TableCell>TOTAL</TableCell>
+                  <TableCell>PAID</TableCell>
+                  <TableCell>BALANCE</TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {churchData.map((data, index) => (
+                  <TableRow key={data._id}>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                      }}
+                    >
+                      {index + 1}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                      }}
+                    >
+                      {data.church.toUpperCase()}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                      }}
+                    >
+                      {data.district.toUpperCase()}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                        fontWeight: 400,
+
+                        textAlign: 'center',
+                      }}
+                    >
+                      {data.total}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                        fontWeight: 400,
+                      }}
+                    >
+                      {'GHS ' +
+                        Number(data.total * 50.0)
+                          .toFixed(2)
+                          .replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                        fontWeight: 400,
+                      }}
+                    >
+                      {'GHS ' +
+                        Number(data.amnt)
+                          .toFixed(2)
+                          .replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                        fontWeight: 400,
+                      }}
+                    >
+                      {'GHS ' +
+                        Number(data.total * 50.0 - data.amnt)
+                          .toFixed(2)
+                          .replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        )}
+
         {showGraphTable === 3 && (
           <div className='tableShow'>
             <Table>
@@ -138,6 +241,7 @@ const Church = ({ churchData, dietData, divisionData }) => {
                     backgroundColor: 'rgb(251, 251, 255)',
                   }}
                 >
+                  <TableCell>RNO</TableCell>
                   <TableCell>DIVISION</TableCell>
                   <TableCell>GENDER</TableCell>
                   <TableCell>TOTAL</TableCell>
@@ -145,8 +249,15 @@ const Church = ({ churchData, dietData, divisionData }) => {
               </TableHead>
 
               <TableBody>
-                {divisionData.map((data) => (
+                {divisionData.map((data, index) => (
                   <TableRow key={data._id + data.gender}>
+                    <TableCell
+                      style={{
+                        fontSize: 15,
+                      }}
+                    >
+                      {index + 1}
+                    </TableCell>
                     <TableCell
                       style={{
                         fontSize: 15,
