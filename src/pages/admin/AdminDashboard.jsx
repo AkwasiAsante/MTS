@@ -264,11 +264,11 @@ const AdminDashboard = () => {
     await axios
       .get(apiCamp + '/stats-church-based')
       .then((response) => {
-        setChurchStats(response.data);
-        const data1 = churchStats.sort((a, b) => b.total - a.total);
-        setIsLoading(false);
+       const { data } = response;
 
+        const data1 = data.sort((a, b) => b.total - a.total);
         setChurchStats(data1);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
