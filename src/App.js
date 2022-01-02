@@ -57,7 +57,7 @@ function App({ checked }) {
               </StyledContainer>
             </BasicRoute>
 
-            <BasicRoute path='/campregister2021'>
+            <BasicRoute path='/campregister2021end'>
               <StyledContainer>
                 <CampRegister />
               </StyledContainer>
