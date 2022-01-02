@@ -42,10 +42,11 @@ const Home = () => {
       >
         <MyAvatar image={Logo} />
       </div>
-      <div className='blink-con'>
+
+      /* <div className='blink-con'>
         <h2>Youth Camp 2021 -</h2>
         <p ref={textRef}></p>
-      </div>
+      </div>*/
       <StyledTitle size={65}>You're Welcome</StyledTitle>
 
       <StyledSubTitle size={27}>Buduburam District Youth</StyledSubTitle>
