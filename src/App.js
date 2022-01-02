@@ -62,7 +62,7 @@ function App({ checked }) {
                 <CampRegister />
               </StyledContainer>
             </BasicRoute>
-            <AuthRoute path='/campregister-2021'>
+            <AuthRoute path='/campregister-2021end'>
               <StyledContainer>
                 <CampRegister />
               </StyledContainer>
