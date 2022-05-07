@@ -1,105 +1,52 @@
-import { StyledContainer, StyledContainerSecond } from './components/Styles';
-//React Loader Spinner
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import AuthRoute from './components/AuthRoute';
-import BasicRoute from './components/BasicRoute';
-import { connect } from 'react-redux';
-
-import CampRegister from './pages/CampRegister';
-import AdminDashboard from './pages/admin/AdminDashboard';
-import CampList from './pages/CampList';
+import React, { useState } from "react";
+import { Container } from "@mui/material";
 import {
-  makeStyles,
-  CssBaseline,
-  createTheme,
-  ThemeProvider,
-} from '@material-ui/core';
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./components/Home/Home";
+import Auth from "./components/Auth/Auth";
+import Profiles from "./components/Profiles/Profiles";
+import ProfileUpdate from "./components/Profiles/UpdateProfile/ProfileUpdate";
+import Footer from "./components/Footer/Footer";
+import PostDetails from "./components/PostDetails/PostDetails";
+import ProfileHome from "./components/Profiles/ProfileHome";
+import ProfileDetail from "./components/Profiles/ProfileDetail/ProfileDetail";
+import CreatorOrTag from "./components/CreatorOrTag/CreatorOrTag";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#333996',
-      light: '#3c44b126',
-    },
-    secondary: {
-      main: '#f83245',
-      light: '#f8324526',
-    },
-    background: {
-      default: '#f4f5fd',
-    },
-  },
-  overrides: {
-    MuiAppBar: {
-      root: {
-        transform: 'translateZ(0)',
-      },
-    },
-  },
-  props: {
-    MuiIconButton: {
-      disableRipple: true,
-    },
-  },
-});
+const App = () => {
+  const user = JSON.parse(localStorage.getItem("userProfile"));
+  const [currentId, setCurrentId] = useState(0);
 
-function App({ checked }) {
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        {checked && (
-          <Switch>
-            <BasicRoute path='/signup/new-user'>
-              <StyledContainer>
-                <Signup />
-              </StyledContainer>
-            </BasicRoute>
+    <Router>
+      <Navbar />
+      <Container maxWidth='lg'>
+        <Routes>
+          <Route path='/' exact element={<Navigate to='/posts' />} />
+          <Route path='/posts' exact element={<Home />} />
+          <Route path='/posts/search' exact element={<Home />} />
+          <Route path='/posts/:id' exact element={<PostDetails />} />
+          <Route path='/profiles' exact element={<ProfileHome />} />
+          <Route path='/profiles/search' exact element={<ProfileHome />} />
+          <Route path='/profile/add-update' exact element={<ProfileUpdate />} />
+          <Route path='/profile/:id' exact element={<ProfileDetail />} />
+          <Route path={"/creators/:name"} element={<CreatorOrTag />} />
+          <Route path={"/tags/:name"} element={<CreatorOrTag />} />
 
-            <BasicRoute path='/campregister2021'>
-              <StyledContainer>
-                <CampRegister />
-              </StyledContainer>
-            </BasicRoute>
-            <AuthRoute path='/campregister-2021'>
-              <StyledContainer>
-                <CampRegister />
-              </StyledContainer>
-            </AuthRoute>
-            <BasicRoute path='/login'>
-              <StyledContainer>
-                <Login />
-              </StyledContainer>
-            </BasicRoute>
-            {/* <AuthRoute path='/trycamp'>
-            <Records />
-          </AuthRoute> */}
-
-            <AuthRoute path='/admindashboard'>
-              <AdminDashboard />
-            </AuthRoute>
-            <AuthRoute path='/camplist'>
-              <CampList />
-            </AuthRoute>
-
-            <BasicRoute path='/'>
-              <StyledContainer>
-                <Home />
-              </StyledContainer>
-            </BasicRoute>
-          </Switch>
-        )}
-      </Router>
-    </ThemeProvider>
+          <Route
+            path='/auth'
+            exact
+            element={!user ? <Auth /> : <Navigate to='/posts' />}
+          />
+        </Routes>
+      </Container>
+      <Footer />
+    </Router>
   );
-}
+};
 
-const mapStateToProps = ({ session }) => ({
-  checked: session.checked,
-});
-export default connect(mapStateToProps)(App);
+export default App;
